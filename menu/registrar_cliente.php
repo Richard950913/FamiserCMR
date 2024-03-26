@@ -1,13 +1,6 @@
 <?php
 include("../conexion.php");
 
-// Verificar si el formulario ya ha sido enviado
-session_start();
-if (isset($_SESSION['formulario_enviado']) && $_SESSION['formulario_enviado'] === true) {
-    echo '<script>alert("El formulario ya ha sido enviado."); window.location.href = "registro_cliente_form.php";</script>';
-    exit;
-}
-
 // Recibir datos del formulario y convertir texto a mayúsculas
 $tipoID = $_POST['tipoID'];
 $numID = $_POST['numID'];
@@ -35,14 +28,15 @@ $stmt->bind_param("sissisississ", $tipoID, $numID, $nombresCL, $sexo, $lugar, $t
 // Ejecutar la consulta
 if ($stmt->execute()) {
     echo '<script>alert("Registro exitoso."); window.location.href = "registro_cliente_form.php";</script>';
-    
-    // Marcar el formulario como enviado
-    $_SESSION['formulario_enviado'] = true;
 } else {
-    echo "Error: " . $stmt->error;
+    // Si ocurre un error al ejecutar la consulta
+    if ($stmt->errno == 1062) { // 1062 es el código de error para duplicado de entrada (Duplicate entry)
+        echo '<script>alert("El cliente ya existe."); window.location.href = "registro_cliente_form.php";</script>';
+    } else {
+        echo '<script>alert("Error al registrar el cliente. Por favor, intente nuevamente más tarde."); window.location.href = "registro_cliente_form.php";</script>';
+    }
 }
 
 // Cerrar declaración y conexión
 $stmt->close();
-$conn->close();
 ?>

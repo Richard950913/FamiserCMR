@@ -57,7 +57,7 @@ include ("../sesion.php");
             <label for="numID">Número de ID:</label>
             <input type="number" id="numID" name="numID" required>
             <span id="clienteExistenteMsg" style="color: red;"></span>
-            <img id="clienteExistenteIcon" src="../styles/check.svg" alt="Cliente disponible" style="display: none;">
+            <img id="clienteExistenteIcon" src="../images/check.svg" alt="Cliente disponible" style="display: none;">
             <label for="nombresCL">Nombres:</label>
             <input type="text" id="nombresCL" name="nombresCL" required>
             <label for="sexo">Sexo:</label>
@@ -115,7 +115,7 @@ include ("../sesion.php");
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("busqueda");
         filter = input.value.toUpperCase();
-        table = document.getElementById("tablaClientes");
+        table = document.getElementById("clientes");
         tr = table.getElementsByTagName("tr");
         for (i = 0; i < tr.length; i++) {
             td = tr[i].getElementsByTagName("td")[1];
