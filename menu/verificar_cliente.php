@@ -6,7 +6,7 @@ if (isset($_POST['numID'])) {
 
     // Preparar la consulta SQL
     $sql = "SELECT * FROM clientes WHERE numID = ?";
-    $stmt = $mysqli->prepare($sql);
+    $stmt = $conn->prepare($sql); // Utiliza $conn en lugar de $mysqli
     $stmt->bind_param("i", $numID);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -18,4 +18,4 @@ if (isset($_POST['numID'])) {
         echo "no_existe";
     }
 }
-?>
+

@@ -160,6 +160,7 @@ include ("../sesion.php");
                 }
             }
         };
+        // Especifica la ruta al archivo verificar_cliente.php aquí
         xhttp.open("POST", "verificar_cliente.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("numID=" + numID);
@@ -167,6 +168,7 @@ include ("../sesion.php");
 
     document.getElementById("numID").addEventListener("input", verificarClienteExistente);
 </script>
+
 
 
 
