@@ -6,7 +6,7 @@ if (isset($_POST['numID'])) {
 
     // Preparar la consulta SQL
     $sql = "SELECT * FROM clientes WHERE numID = ?";
-    $stmt = $conn->prepare($sql); // Utiliza $conn en lugar de $mysqli
+    $stmt = $conn->prepare($sql); // Utiliza $conn en lugar de $mysqli ya que la conexion esta incluida en conexion.php
     $stmt->bind_param("i", $numID);
     $stmt->execute();
     $result = $stmt->get_result();

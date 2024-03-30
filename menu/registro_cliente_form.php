@@ -137,6 +137,7 @@ include ("../sesion.php");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
+    // Funcion de Ajax para verificar el cliente existente automaticamente
     function verificarClienteExistente() {
         var numID = document.getElementById("numID").value.trim();
 
@@ -160,7 +161,7 @@ include ("../sesion.php");
                 }
             }
         };
-        // Especifica la ruta al archivo verificar_cliente.php aquí
+        // Especifica la ruta al archivo verificar_cliente.php
         xhttp.open("POST", "verificar_cliente.php", true);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.send("numID=" + numID);
