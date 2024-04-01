@@ -8,22 +8,24 @@
 </head>
 <body>
     <div class="login-container">
-        <!-- Agrega la imagen aquí -->
+        
         <img src="images/LOGO.png" alt="Logo" class="logo-image">
         <h2>Inicia Sesión</h2>
         <form id="loginForm">
             <label for="username">Usuario:</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username" oninput="this.value = this.value.toLowerCase()" required>
 
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-
-            <!-- Cambié el tipo de botón a "submit" -->
+            <div class="container">
+                <input type="password" class="passw" id="Input"> 
+                <img src="images/Show.png" alt="" class="icon" id="Eye">
+             </div>
+            
             <button type="submit">Iniciar Sesión</button>
         </form>
         <div id="error-msg"></div>
     </div>
-
+    
     <script src="script.js"></script>
 
     <script>

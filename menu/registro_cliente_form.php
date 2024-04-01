@@ -1,7 +1,7 @@
 <?php
 include ("../conexion.php");
 include ("../sesion.php");
-
+include ("../validar_rol.php");
 ?>
 
 <!DOCTYPE html>
