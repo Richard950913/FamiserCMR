@@ -1,7 +1,7 @@
 <?php
 include ("../conexion.php");
 include ("../sesion.php");
-
+include ("../validar_rol.php");
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +46,7 @@ include ("../sesion.php");
 
     <div class="container">
         <h2>Registro de Clientes</h2>
-        <form method="post" action="registrar_cliente.php" onsubmit="return validarEmail()">
+        <form method="post" action="" onsubmit="return validarEmail()" id=registro-form>
             <label for="tipoID">Tipo de ID:</label>
             <select class="form-select" name="tipoID" id="tipoID" required>
                 <option value="C.C">C.C</option>
@@ -83,6 +83,7 @@ include ("../sesion.php");
             <label for="empresa">Empresa:</label>
             <input type="text" id="empresa" name="empresa">
             <input type="submit" value="Registrar">
+            <div id="mensaje-container" class="anuncio"></div>
         </form>
     </div>
 
@@ -91,6 +92,7 @@ include ("../sesion.php");
         <input type="text" id="busqueda" placeholder="Buscar cliente...">
         <button id="buscarBtn">Buscar</button>
     </div>
+    
 
     <script>
         // Función para validar el correo electrónico
@@ -168,6 +170,35 @@ include ("../sesion.php");
     }
 
     document.getElementById("numID").addEventListener("input", verificarClienteExistente);
+</script>
+
+<!-- Script de jQuery para enviar los datos del formulario mediante AJAX -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#registro-form').submit(function(event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+
+            $.ajax({
+                type: 'POST',
+                url: 'registrar_cliente.php', // Ruta al archivo PHP que maneja el registro
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function(response) {
+                    // Mostrar mensaje de éxito o error
+                    var messageContainer = $('#mensaje-container');
+                    if (response.success) {
+                        messageContainer.text(response.message).css('color', 'green');
+                    } else {
+                        messageContainer.text(response.message).css('color', 'red');
+                    }
+                },
+                error: function() {
+                    $('#mensaje-container').text('Error al procesar la solicitud.').css('color', 'red');
+                }
+            });
+        });
+    });
 </script>
 
 

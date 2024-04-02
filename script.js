@@ -1,4 +1,6 @@
-function login() {
+function login(event) {
+    event.preventDefault(); // Evitar la acción por defecto del formulario (enviar)
+
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
 
@@ -26,15 +28,12 @@ function login() {
         }
     })
     .catch(error => {
+        // Manejar errores de red o del servidor
         console.error('There has been a problem with your fetch operation:', error);
+        document.getElementById('error-msg').innerHTML = 'Ha ocurrido un error. Por favor, intenta de nuevo.';
     });
 }
 
-// Agregar evento de teclado para activar la función login al presionar Enter
-document.getElementById("loginForm").addEventListener("keypress", function(event) {
-    // Verificar si la tecla presionada es Enter
-    if (event.keyCode === 13) {
-        event.preventDefault(); // Evitar la acción por defecto del formulario (enviar)
-        login(); // Llamar a la función de inicio de sesión
-    }
-});
+// Agregar evento de envío del formulario para activar la función login
+document.getElementById("loginForm").addEventListener("submit", login);
+
