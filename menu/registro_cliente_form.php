@@ -12,6 +12,15 @@ include ("../validar_rol.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/style2.css">
     <title>Dashboard</title>
+    <style>
+        table, th, td{
+            border: 1px solid;
+        }
+        table{
+            width: 80%;
+            border-collapse: collapse;
+        }
+        </style>
 </head>
 
 <body>
@@ -111,7 +120,13 @@ include ("../validar_rol.php");
             <th>Fec. Nac</th>
             <th>Oficio</th>
             <th>Empresa</th>
+            <th></th>
+            <th></th>
         </thead>
+
+        <tbody id="content">
+            
+        </tbody>
     </table>
     </div>
     
