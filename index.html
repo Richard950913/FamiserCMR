@@ -8,17 +8,14 @@
 </head>
 <body>
     <div class="login-container">
-        <!-- Agrega la imagen aquí -->
+        
         <img src="images/LOGO.png" alt="Logo" class="logo-image">
         <h2>Inicia Sesión</h2>
         <form id="loginForm">
             <label for="username">Usuario:</label>
             <input type="text" id="username" name="username" oninput="this.value = this.value.toLowerCase()" required>
-
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
-
-            <!-- Cambié el tipo de botón a "submit" -->
+            <input type="password" id="password" name="password" required>         
             <button type="submit">Iniciar Sesión</button>
         </form>
         <div id="error-msg"></div>
@@ -28,13 +25,14 @@
 
     <script>
         // Agregar evento de teclado al formulario
-        document.getElementById("loginForm").addEventListener("keypress", function(event) {
-            // Verificar si la tecla presionada es Enter
-            if (event.keyCode === 13) {
-                event.preventDefault(); // Evitar la acción por defecto del formulario (enviar)
-                login(); // Llamar a la función de inicio de sesión
-            }
-        });
+document.getElementById("loginForm").addEventListener("keypress", function(event) {
+    // Verificar si la tecla presionada es Enter
+    if (event.keyCode === 13) {
+        event.preventDefault(); // Evitar la acción por defecto del formulario (enviar)
+        login(event); // Llamar a la función de inicio de sesión pasando el evento como argumento
+    }
+});
+
     </script>
 </body>
 </html>
