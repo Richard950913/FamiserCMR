@@ -104,7 +104,7 @@ include ("../validar_rol.php");
     <div class="container">
         <h2>Búsqueda de Cliente</h2>
         <input type="text" id="busqueda" placeholder="Buscar cliente...">
-        <button id="buscarBtn">Buscar</button>
+       
         <p></p>
         <table>
         <thead>
@@ -128,9 +128,38 @@ include ("../validar_rol.php");
             
         </tbody>
     </table>
+
+
+
     </div>
     
-    
+    <!-- Busqueda cliente x AJAX-->
+<!-- Busqueda cliente x AJAX-->
+<script>
+    getData()
+
+    document.getElementById("busqueda").addEventListener("keyup", getData)
+
+    function getData() {
+        let input = document.getElementById("busqueda").value;
+        let content = document.getElementById("content");
+        let url = "loadcl.php";
+        let formData = new FormData();
+        formData.append('busqueda', input);
+
+        fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                content.innerHTML = data.html; // Actualiza el contenido de la tabla con el HTML recibido
+            })
+            .catch(err => console.log(err));
+    }
+</script>
+
+
 
     <script>
         // Función para validar el correo electrónico
@@ -149,26 +178,6 @@ include ("../validar_rol.php");
             return true; // Permitir el envío del formulario
         }
 
-
-        // Script de búsqueda de cliente
-        function buscarCliente() {
-            var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("busqueda");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("clientes");
-            tr = table.getElementsByTagName("tr");
-            for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    } else {
-                        tr[i].style.display = "none";
-                    }
-                }
-            }
-        }
 
         // Asociar la función de búsqueda al evento de pulsación de tecla
         document.getElementById("busqueda").addEventListener("keyup", buscarCliente);
