@@ -18,25 +18,7 @@ if ($campo != null) {
     $where .= ")";
 }
 
-// Obtener la cantidad total de registros
-$sql_total = "SELECT COUNT(*) AS total FROM $table $where";
-$resultado_total = $conn->query($sql_total);
-$total_registros = $resultado_total->fetch_assoc()['total'];
-
-// Definir la cantidad de registros a mostrar por página
-$registros_por_pagina = 10;
-
-// Calcular la cantidad de páginas
-$total_paginas = ceil($total_registros / $registros_por_pagina);
-
-// Calcular el número de página actual
-$pagina_actual = isset($_POST['pagina']) ? intval($_POST['pagina']) : 1;
-
-// Calcular el inicio del límite para la consulta SQL
-$offset = ($pagina_actual - 1) * $registros_por_pagina;
-
-$sql = "SELECT " . implode(", ", $columns) . " FROM $table $where LIMIT $registros_por_pagina OFFSET $offset";
-
+$sql = "SELECT " . implode(", ", $columns) . " FROM $table $where ";
 $resultado = $conn->query($sql);
 $num_rows = $resultado->num_rows;
 
@@ -66,6 +48,6 @@ if ($num_rows > 0) {
     $html .= '</tr>';
 }
 
-// Devolver el HTML como parte de un objeto JSON
-echo json_encode(array('html' => $html, 'total_registros' => $total_registros, 'total_paginas' => $total_paginas), JSON_UNESCAPED_UNICODE);
+// Devolver el HTML en un objeto JSON
+echo json_encode(array('html' => $html), JSON_UNESCAPED_UNICODE);
 ?>

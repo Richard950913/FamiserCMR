@@ -13,14 +13,17 @@ include ("../validar_rol.php");
     <link rel="stylesheet" href="../styles/style2.css">
     <title>Dashboard</title>
     <style>
-        table, th, td{
+        table,
+        th,
+        td {
             border: 1px solid;
         }
-        table{
+
+        table {
             width: 80%;
             border-collapse: collapse;
         }
-        </style>
+    </style>
 </head>
 
 <body>
@@ -55,7 +58,7 @@ include ("../validar_rol.php");
         </div>
         <a href="#">SOPORTE</a>
     </div>
-    <script src="script.js"></script>
+
 
     <div class="container">
         <h2>Registro de Clientes</h2>
@@ -104,60 +107,65 @@ include ("../validar_rol.php");
     <div class="container">
         <h2>Búsqueda de Cliente</h2>
         <input type="text" id="busqueda" placeholder="Buscar cliente...">
-       
-        <p></p>
-        <table>
-        <thead>
-            <th>Tipo ID</th>
-            <th>Num. ID </th>
-            <th>Nombres</th>
-            <th>Sexo</th>
-            <th>Lugar ID</th>
-            <th>Telefono1</th>
-            <th>Telefono2</th>
-            <th>Direccion</th>
-            <th>Correo</th>
-            <th>Fec. Nac</th>
-            <th>Oficio</th>
-            <th>Empresa</th>
-            <th></th>
-            <th></th>
-        </thead>
 
-        <tbody id="content">
-            
-        </tbody>
-    </table>
+        <p></p>
+       
+        <table>
+            <thead>
+                <th>Tipo ID</th>
+                <th>Num. ID </th>
+                <th>Nombres</th>
+                <th>Sexo</th>
+                <th>Lugar ID</th>
+                <th>Telefono1</th>
+                <th>Telefono2</th>
+                <th>Direccion</th>
+                <th>Correo</th>
+                <th>Fec. Nac</th>
+                <th>Oficio</th>
+                <th>Empresa</th>
+                <th></th>
+                <th></th>
+            </thead>
+
+            <tbody id="content">
+
+            </tbody>
+        </table>
 
 
 
     </div>
-    
     <!-- Busqueda cliente x AJAX-->
-<!-- Busqueda cliente x AJAX-->
-<script>
-    getData()
+    <script>
+        getData(); // Llamada inicial para cargar los datos al cargar la página
+document.getElementById("busqueda").addEventListener("keyup", getData);
 
-    document.getElementById("busqueda").addEventListener("keyup", getData)
+function getData() {
+    let input = document.getElementById("busqueda").value;
+    let content = document.getElementById("content");
+    let url = "loadcl.php";
+    let formData = new FormData();
+    formData.append('busqueda', input);
 
-    function getData() {
-        let input = document.getElementById("busqueda").value;
-        let content = document.getElementById("content");
-        let url = "loadcl.php";
-        let formData = new FormData();
-        formData.append('busqueda', input);
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.html) {
+            content.innerHTML = data.html; // Actualiza el contenido de la tabla con el HTML recibido
+        } else {
+            console.log("No se recibió HTML en la respuesta JSON.");
+        }
+    })
+    .catch(err => console.log(err));
+}
 
-        fetch(url, {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                content.innerHTML = data.html; // Actualiza el contenido de la tabla con el HTML recibido
-            })
-            .catch(err => console.log(err));
-    }
-</script>
+
+
+    </script>
 
 
 
@@ -182,8 +190,6 @@ include ("../validar_rol.php");
         // Asociar la función de búsqueda al evento de pulsación de tecla
         document.getElementById("busqueda").addEventListener("keyup", buscarCliente);
     </script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
         // Funcion de Ajax para verificar el cliente existente automaticamente
@@ -220,7 +226,6 @@ include ("../validar_rol.php");
     </script>
 
     <!-- Script de jQuery para enviar los datos del formulario mediante AJAX -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#registro-form').submit(function (event) {
@@ -247,9 +252,6 @@ include ("../validar_rol.php");
             });
         });
     </script>
-
-
-
 
 </body>
 
