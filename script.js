@@ -1,3 +1,5 @@
+//SCRIPTS de Dashboard.php
+
 function login(event) {
     event.preventDefault(); // Evitar la acción por defecto del formulario (enviar)
 
