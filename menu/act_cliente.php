@@ -1,7 +1,7 @@
 <?php
-include("../conexion.php");
+include ("../conexion.php");
 
-if($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
     $cliente_id = $_POST['id'];
     $tipoID = $_POST['tipoID'];
@@ -33,13 +33,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 empresa = '$empresa' 
             WHERE idclientes = '$cliente_id'";
 
-    if($conn->query($sql) === TRUE) {
-        echo "Registro actualizado correctamente.";
+    if ($conn->query($sql) === TRUE) {
+        echo "Registro actualizado correctamente.<br>";
+        echo '<button onclick="cerrarVentana()">Cerrar</button>';
     } else {
         echo "Error al actualizar el registro: " . $conn->error;
     }
 }
 
 $conn->close();
+
 ?>
 
+<script>
+    function cerrarVentana() {
+        window.location.href = "registro_cliente_form.php";
+    }
+</script>
