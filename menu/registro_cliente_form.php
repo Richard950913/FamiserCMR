@@ -112,6 +112,7 @@ include ("../validar_rol.php");
        
         <table>
             <thead>
+            <th>ID Cliente</th>
                 <th>Tipo ID</th>
                 <th>Num. ID </th>
                 <th>Nombres</th>
