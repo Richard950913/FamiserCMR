@@ -14,8 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $direccion = strtoupper($_POST['direccion']);
     $email = $_POST['email'] !== '' ? $_POST['email'] : null;
     $fec_nac = $_POST['fec_nac'] !== '' ? $_POST['fec_nac'] : null;
-    $oficio = strtoupper($_POST['oficio']) !== '' ? $_POST['oficio'] : null;
-    $empresa = strtoupper($_POST['empresa'])!== '' ? $_POST['empresa'] : null;
+    $oficio = strtoupper($_POST['oficio']);
+    $empresa = strtoupper($_POST['empresa']);
     
     // Actualizar el registro en la base de datos
     $sql = "UPDATE clientes SET 

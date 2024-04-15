@@ -83,28 +83,29 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             </div>
             <!-- Incluir el archivo de scripts -->
             <script>
-                // Función para validar el correo electrónico
-                function validarEmail() {
-                    var emailInput = document.getElementById("email").value.trim(); // Eliminar espacios en blanco al principio y al final
-                    var emailError = document.getElementById("emailError");
-                    // Si el campo está en blanco o no sigue un formato de correo electrónico válido, mostrar un mensaje de error
-                    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (emailInput === "" || !emailRegex.test(emailInput)) {
-                        emailError.innerText = "El email proporcionado no sigue un formato regular.";
-                        return false; // Evitar que se envíe el formulario
-                    } else {
-                        emailError.innerText = ""; // Limpiar el mensaje de error si el correo es válido
-                        return true; // Permitir el envío del formulario
-                    }
-                }
+    // Función para validar el correo electrónico
+    function validarEmail() {
+        var emailInput = document.getElementById("email").value.trim(); // Eliminar espacios en blanco al principio y al final
+        var emailError = document.getElementById("emailError");
+        // Si el campo no está en blanco y no sigue un formato de correo electrónico válido, mostrar un mensaje de error
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailInput !== "" && !emailRegex.test(emailInput)) {
+            emailError.innerText = "El email proporcionado no sigue un formato regular.";
+            return false; // Evitar que se envíe el formulario
+        } else {
+            emailError.innerText = ""; // Limpiar el mensaje de error si el correo es válido
+            return true; // Permitir el envío del formulario
+        }
+    }
 
-                // Asignar la función validarEmail() al evento de envío del formulario
-                document.getElementById("editarForm").addEventListener("submit", function (event) {
-                    if (!validarEmail()) {
-                        event.preventDefault(); // Detener el envío del formulario si el correo no cumple el formato
-                    }
-                });
-            </script>
+    // Asignar la función validarEmail() al evento de envío del formulario
+    document.getElementById("editarForm").addEventListener("submit", function (event) {
+        if (!validarEmail()) {
+            event.preventDefault(); // Detener el envío del formulario si el correo no cumple el formato
+        }
+    });
+</script>
+
 
 
 

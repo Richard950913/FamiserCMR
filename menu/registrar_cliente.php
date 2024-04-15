@@ -20,8 +20,8 @@ try {
     $direccion = strtoupper($_POST['direccion']);
     $email = $_POST['email'] !== '' ? $_POST['email'] : null;
     $fec_nac = $_POST['fec_nac'] !== '' ? $_POST['fec_nac'] : null;
-    $oficio = strtoupper($_POST['oficio']) !== '' ? $_POST['oficio'] : null;
-    $empresa = strtoupper($_POST['empresa'])!== '' ? $_POST['empresa'] : null;
+    $oficio = strtoupper($_POST['oficio']);
+    $empresa = strtoupper($_POST['empresa']);
 
     // Preparar la consulta SQL con parámetros
     $sql = "INSERT INTO clientes (tipoID, numID, nombresCL, sexo, lugar, telefono1, telefono2, direccion, email, fec_nac, oficio, empresa)
