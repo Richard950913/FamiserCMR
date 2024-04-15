@@ -39,7 +39,7 @@ if ($num_rows > 0) {
         $html .= '<td>' . $row['fec_nac'] . '</td>';
         $html .= '<td>' . $row['oficio'] . '</td>';
         $html .= '<td>' . $row['empresa'] . '</td>';
-        $html .= '<td><a href="editar_cliente.php?id=' . $row['idclientes'] . '" target="_blank">Editar</a></td>';
+        $html .= '<td><a href="editar_cliente.php?id=' . $row['idclientes'] . '">Editar</a></td>';
 
         $html .= '<td><a href="">Eliminar</a></td>';
         $html .= '</tr>';
