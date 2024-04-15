@@ -180,8 +180,7 @@ function validarEmail() {
     return true; // Permitir el envío del formulario
 }
 
-// Asociar la función de búsqueda al evento de pulsación de tecla
-document.getElementById("busqueda").addEventListener("keyup", buscarCliente);
+
 
 </script>
 <script>
@@ -219,36 +218,65 @@ document.getElementById("numID").addEventListener("input", verificarClienteExist
 
 
 </script>
-<script>
-    
-//Script de jQuery para enviar los datos del formulario mediante AJAX
-
-$(document).ready(function () {
-    $('#registro-form').submit(function (event) {
-        event.preventDefault(); // Evitar el envío del formulario por defecto
-
-        $.ajax({
-            type: 'POST',
-            url: 'registrar_cliente.php', // Ruta al archivo PHP que maneja el registro
-            data: $(this).serialize(),
-            dataType: 'json',
-            success: function (response) {
-                // Mostrar mensaje de éxito o error
-                var messageContainer = $('#mensaje-container');
-                if (response.success) {
-                    messageContainer.text(response.message).css('color', 'green');
-                } else {
-                    messageContainer.text(response.message).css('color', 'red');
-                }
-            },
-            error: function () {
-                $('#mensaje-container').text('Error al procesar la solicitud.').css('color', 'red');
-            }
+<!-- Script de jQuery para enviar los datos del formulario mediante AJAX -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#registro-form').submit(function (event) {
+                event.preventDefault(); // Evitar el envío del formulario por defecto
+                $.ajax({
+                    type: 'POST',
+                    url: 'registrar_cliente.php', // Ruta al archivo PHP que maneja el registro
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function (response) {
+                        // Mostrar mensaje de éxito o error
+                        var messageContainer = $('#mensaje-container');
+                        if (response.success) {
+                            messageContainer.text(response.message).css('color', 'green');
+                        } else {
+                            messageContainer.text(response.message).css('color', 'red');
+                        }
+                    },
+                    error: function () {
+                        $('#mensaje-container').text('Error al procesar la solicitud.').css('color', 'red');
+                    }
+                });
+            });
         });
-    });
-});
+    </script>
 
+    <!--Eliminar cliente-->
+<script>
+    function eliminarCliente(id, nombre) {
+        var confirmacion = confirm("¿Está seguro de eliminar este registro? " + nombre);
+
+        if (confirmacion) {
+            // Enviar la solicitud AJAX para eliminar el cliente
+            $.ajax({
+                type: 'POST',
+                url: 'eliminar_cliente.php',
+                data: { id: id },
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        // Eliminación exitosa
+                        alert("El cliente ha sido eliminado correctamente.");
+                        // Aquí puedes recargar la lista de clientes si lo deseas
+                    } else {
+                        // Error al eliminar el cliente
+                        alert("Error al eliminar el cliente: " + response.message);
+                    }
+                },
+                error: function () {
+                    // Error de conexión
+                    alert("Error al procesar la solicitud. Por favor, inténtelo nuevamente.");
+                }
+            });
+        }
+    }
 </script>
+
 </body>
 
 </html>

@@ -26,7 +26,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <body>
             <div class="container">
                 <h2>Editar Cliente</h2>
-                <form method="post" action="act_cliente.php">
+                <form method="post" action="act_cliente.php" id="editarForm">
                     <input type="hidden" name="id" value="<?php echo $row['idclientes']; ?>">
                     <!-- Mostrar los datos del cliente para su edición -->
 
@@ -67,9 +67,10 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
                     <label for="email">Email:</label>
                     <input type="text" id="email" name="email" value="<?php echo $row['email']; ?>"><br>
+                    <span id="emailError" style="color: red;"></span><br>
 
                     <label for="fec_nac">Fecha de nacimiento:</label>
-                    <input type="text" id="fec_nac" name="fec_nac" value="<?php echo $row['fec_nac']; ?>"><br>
+                    <input type="date" id="fec_nac" name="fec_nac" value="<?php echo $row['fec_nac']; ?>"><br>
 
                     <label for="oficio">Oficio:</label>
                     <input type="text" id="oficio" name="oficio" value="<?php echo $row['oficio']; ?>"><br>
@@ -81,7 +82,32 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 </form>
             </div>
             <!-- Incluir el archivo de scripts -->
-            <script src="scriptrc.js"></script>
+            <script>
+                // Función para validar el correo electrónico
+                function validarEmail() {
+                    var emailInput = document.getElementById("email").value.trim(); // Eliminar espacios en blanco al principio y al final
+                    var emailError = document.getElementById("emailError");
+                    // Si el campo está en blanco o no sigue un formato de correo electrónico válido, mostrar un mensaje de error
+                    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (emailInput === "" || !emailRegex.test(emailInput)) {
+                        emailError.innerText = "El email proporcionado no sigue un formato regular.";
+                        return false; // Evitar que se envíe el formulario
+                    } else {
+                        emailError.innerText = ""; // Limpiar el mensaje de error si el correo es válido
+                        return true; // Permitir el envío del formulario
+                    }
+                }
+
+                // Asignar la función validarEmail() al evento de envío del formulario
+                document.getElementById("editarForm").addEventListener("submit", function (event) {
+                    if (!validarEmail()) {
+                        event.preventDefault(); // Detener el envío del formulario si el correo no cumple el formato
+                    }
+                });
+            </script>
+
+
+
         </body>
 
         </html>

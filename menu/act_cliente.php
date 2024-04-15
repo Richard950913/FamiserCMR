@@ -6,17 +6,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cliente_id = $_POST['id'];
     $tipoID = $_POST['tipoID'];
     $numID = $_POST['numID'];
-    $nombresCL = $_POST['nombresCL'];
+    $nombresCL = strtoupper($_POST['nombresCL']);
     $sexo = $_POST['sexo'];
-    $lugar = $_POST['lugar'];
-    $telefono1 = $_POST['telefono1'];
-    $telefono2 = $_POST['telefono2'];
-    $direccion = $_POST['direccion'];
-    $email = $_POST['email'];
-    $fec_nac = $_POST['fec_nac'];
-    $oficio = $_POST['oficio'];
-    $empresa = $_POST['empresa'];
-
+    $lugar = strtoupper($_POST['lugar']);
+    $telefono1 = $_POST['telefono1'] !== '' ? $_POST['telefono1'] : null;
+    $telefono2 = $_POST['telefono2'] !== '' ? $_POST['telefono2'] : null;
+    $direccion = strtoupper($_POST['direccion']);
+    $email = $_POST['email'] !== '' ? $_POST['email'] : null;
+    $fec_nac = $_POST['fec_nac'] !== '' ? $_POST['fec_nac'] : null;
+    $oficio = strtoupper($_POST['oficio']) !== '' ? $_POST['oficio'] : null;
+    $empresa = strtoupper($_POST['empresa'])!== '' ? $_POST['empresa'] : null;
+    
     // Actualizar el registro en la base de datos
     $sql = "UPDATE clientes SET 
                 tipoID = '$tipoID', 
