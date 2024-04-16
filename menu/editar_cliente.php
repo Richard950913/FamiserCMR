@@ -78,6 +78,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <label for="empresa">Empresa:</label>
                     <input type="text" id="empresa" name="empresa" value="<?php echo $row['empresa']; ?>"><br>
 
+                    <label for="acudiente">Acudiente:</label>
+                    <input type="text" id="acudiente" name="acudiente" value="<?php echo $row['acudiente']; ?>"><br>
+
                     <input type="submit" value="Actualizar">
                 </form>
             </div>
@@ -105,7 +108,35 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         }
     });
 </script>
+<!--verificar acudiente-->
+<script>
+    function actualizarCampos() {
+        var fechaNacimiento = document.getElementById("fec_nac").value;
+        var hoy = new Date();
+        var fechaNacimiento = new Date(fechaNacimiento);
+        var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+        
+        if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+            edad--;
+        }
+        
+        var empresaField = document.getElementById("empresa");
+        var acudienteField = document.getElementById("acudiente");
+        
+        if (edad < 18) {
+            acudienteField.style.display = "block";
+            acudienteField.required = true;
+        } else {
+            acudienteField.style.display = "none";
+            acudienteField.required = false;
+            acudienteField.value = ""; // Limpiar el valor si se oculta
+        }
+    }
 
+    // Asignar la función actualizarCampos al evento onchange del campo de fecha de nacimiento
+    document.getElementById("fec_nac").addEventListener("change", actualizarCampos);
+</script>
 
 
 

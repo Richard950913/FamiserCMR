@@ -99,6 +99,12 @@ include ("../validar_rol.php");
             <input type="text" id="oficio" name="oficio">
             <label for="empresa">Empresa:</label>
             <input type="text" id="empresa" name="empresa">
+            <!-- Contenedor del campo de acudiente -->
+            <div id="acudienteContainer" style="display: none;">
+                <label for="acudiente">Acudiente:</label>
+                <input type="text" id="acudiente" name="acudiente" style= "width:60%">
+            </div>
+            
             <input type="submit" value="Registrar">
             <div id="mensaje-container" class="anuncio"></div>
         </form>
@@ -109,10 +115,10 @@ include ("../validar_rol.php");
         <input type="text" id="busqueda" placeholder="Buscar cliente...">
 
         <p></p>
-       
+
         <table>
             <thead>
-            <th>ID Cliente</th>
+                <th>ID Cliente</th>
                 <th>Tipo ID</th>
                 <th>Num. ID </th>
                 <th>Nombres</th>
@@ -125,6 +131,7 @@ include ("../validar_rol.php");
                 <th>Fec. Nac</th>
                 <th>Oficio</th>
                 <th>Empresa</th>
+                <th>Acudiente</th>
                 <th></th>
                 <th></th>
             </thead>
@@ -134,92 +141,92 @@ include ("../validar_rol.php");
             </tbody>
         </table>
     </div>
-<!-- Incluir el archivo de scripts -->
-<script>
-    //Busqueda cliente x AJAX
+    <!-- Incluir el archivo de scripts -->
+    <script>
+        //Busqueda cliente x AJAX
 
-getData(); // Llamada inicial para cargar los datos al cargar la página
-document.getElementById("busqueda").addEventListener("keyup", getData);
+        getData(); // Llamada inicial para cargar los datos al cargar la página
+        document.getElementById("busqueda").addEventListener("keyup", getData);
 
-function getData() {
-    let input = document.getElementById("busqueda").value;
-    let content = document.getElementById("content");
-    let url = "loadcl.php";
-    let formData = new FormData();
-    formData.append('busqueda', input);
+        function getData() {
+            let input = document.getElementById("busqueda").value;
+            let content = document.getElementById("content");
+            let url = "loadcl.php";
+            let formData = new FormData();
+            formData.append('busqueda', input);
 
-    fetch(url, {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.html) {
-                content.innerHTML = data.html; // Actualiza el contenido de la tabla con el HTML recibido
-            } else {
-                console.log("No se recibió HTML en la respuesta JSON.");
-            }
-        })
-        .catch(err => console.log(err));
-}
-</script>
-<script>
-    // Función para validar el correo electrónico
-function validarEmail() {
-    var emailInput = document.getElementById("email").value.trim(); // Eliminar espacios en blanco al principio y al final
-    // Si el campo está en blanco, permitir que se envíe el formulario
-    if (emailInput === "") {
-        return true;
-    }
-    // Si el campo no está en blanco, validar el formato del correo electrónico
-    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailInput)) {
-        alert("El email proporcionado no sigue un formato regular.");
-        return false; // Evitar que se envíe el formulario
-    }
-    return true; // Permitir el envío del formulario
-}
-
-
-
-</script>
-<script>
-    // Funcion de Ajax para verificar el cliente existente automaticamente
-function verificarClienteExistente() {
-    var numID = document.getElementById("numID").value.trim();
-
-    if (numID === "") {
-        document.getElementById("clienteExistenteMsg").innerText = "";
-        document.getElementById("clienteExistenteIcon").style.display = "none";
-        return;
-    }
-
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            var response = this.responseText;
-            if (response === "existe") {
-                document.getElementById("clienteExistenteMsg").innerText = "Cliente ya existente";
-                document.getElementById("clienteExistenteMsg").style.color = "red";
-                document.getElementById("clienteExistenteIcon").style.display = "none";
-            } else {
-                document.getElementById("clienteExistenteMsg").innerText = "";
-                document.getElementById("clienteExistenteIcon").style.display = "inline";
-            }
+            fetch(url, {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.html) {
+                        content.innerHTML = data.html; // Actualiza el contenido de la tabla con el HTML recibido
+                    } else {
+                        console.log("No se recibió HTML en la respuesta JSON.");
+                    }
+                })
+                .catch(err => console.log(err));
         }
-    };
-    // Especifica la ruta al archivo verificar_cliente.php
-    xhttp.open("POST", "verificar_cliente.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("numID=" + numID);
-}
+    </script>
+    <script>
+        // Función para validar el correo electrónico
+        function validarEmail() {
+            var emailInput = document.getElementById("email").value.trim(); // Eliminar espacios en blanco al principio y al final
+            // Si el campo está en blanco, permitir que se envíe el formulario
+            if (emailInput === "") {
+                return true;
+            }
+            // Si el campo no está en blanco, validar el formato del correo electrónico
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput)) {
+                alert("El email proporcionado no sigue un formato regular.");
+                return false; // Evitar que se envíe el formulario
+            }
+            return true; // Permitir el envío del formulario
+        }
 
-document.getElementById("numID").addEventListener("input", verificarClienteExistente);
 
 
-</script>
-<!-- Script de jQuery para enviar los datos del formulario mediante AJAX -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </script>
+    <script>
+        // Funcion de Ajax para verificar el cliente existente automaticamente
+        function verificarClienteExistente() {
+            var numID = document.getElementById("numID").value.trim();
+
+            if (numID === "") {
+                document.getElementById("clienteExistenteMsg").innerText = "";
+                document.getElementById("clienteExistenteIcon").style.display = "none";
+                return;
+            }
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    var response = this.responseText;
+                    if (response === "existe") {
+                        document.getElementById("clienteExistenteMsg").innerText = "Cliente ya existente";
+                        document.getElementById("clienteExistenteMsg").style.color = "red";
+                        document.getElementById("clienteExistenteIcon").style.display = "none";
+                    } else {
+                        document.getElementById("clienteExistenteMsg").innerText = "";
+                        document.getElementById("clienteExistenteIcon").style.display = "inline";
+                    }
+                }
+            };
+            // Especifica la ruta al archivo verificar_cliente.php
+            xhttp.open("POST", "verificar_cliente.php", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("numID=" + numID);
+        }
+
+        document.getElementById("numID").addEventListener("input", verificarClienteExistente);
+
+
+    </script>
+    <!-- Script de jQuery para enviar los datos del formulario mediante AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#registro-form').submit(function (event) {
@@ -247,35 +254,71 @@ document.getElementById("numID").addEventListener("input", verificarClienteExist
     </script>
 
     <!--Eliminar cliente-->
-<script>
-    function eliminarCliente(id, nombre) {
-        var confirmacion = confirm("¿Está seguro de eliminar este registro? " + nombre);
+    <script>
+        function eliminarCliente(id, nombre) {
+            var confirmacion = confirm("¿Está seguro de eliminar este registro? " + nombre);
 
-        if (confirmacion) {
-            // Enviar la solicitud AJAX para eliminar el cliente
-            $.ajax({
-                type: 'POST',
-                url: 'eliminar_cliente.php',
-                data: { id: id },
-                dataType: 'json',
-                success: function (response) {
-                    if (response.success) {
-                        // Eliminación exitosa
-                        alert("El cliente ha sido eliminado correctamente.");
-                        // Aquí puedes recargar la lista de clientes si lo deseas
-                    } else {
-                        // Error al eliminar el cliente
-                        alert("Error al eliminar el cliente: " + response.message);
+            if (confirmacion) {
+                // Enviar la solicitud AJAX para eliminar el cliente
+                $.ajax({
+                    type: 'POST',
+                    url: 'eliminar_cliente.php',
+                    data: { id: id },
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response.success) {
+                            // Eliminación exitosa
+                            alert("El cliente ha sido eliminado correctamente.");
+                            // Aquí puedes recargar la lista de clientes si lo deseas
+                        } else {
+                            // Error al eliminar el cliente
+                            alert("Error al eliminar el cliente: " + response.message);
+                        }
+                    },
+                    error: function () {
+                        // Error de conexión
+                        alert("Error al procesar la solicitud. Por favor, inténtelo nuevamente.");
                     }
-                },
-                error: function () {
-                    // Error de conexión
-                    alert("Error al procesar la solicitud. Por favor, inténtelo nuevamente.");
-                }
-            });
+                });
+            }
+        }
+    </script>
+
+    <!-- verificar edad si es menor-->
+    <script>
+    // Función para actualizar la visibilidad del campo de acudiente según la edad
+    function actualizarCampos() {
+        var fechaNacimiento = document.getElementById("fec_nac").value;
+        var hoy = new Date();
+        var fechaNacimiento = new Date(fechaNacimiento);
+        var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+
+        if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+            edad--;
+        }
+
+        var acudienteContainer = document.getElementById("acudienteContainer");
+
+        if (edad < 18) {
+            acudienteContainer.style.display = "block";
+            document.getElementById("acudiente").required = true;
+        } else {
+            acudienteContainer.style.display = "none";
+            document.getElementById("acudiente").required = false;
+            document.getElementById("acudiente").value = ""; // Limpiar el valor si se oculta
         }
     }
+
+    // Asignar la función actualizarCampos al evento onchange del campo de fecha de nacimiento
+    document.getElementById("fec_nac").addEventListener("change", actualizarCampos);
+
+    // Llamar a la función actualizarCampos al cargar la página para asegurarse de que el campo se oculte inicialmente
+    window.onload = actualizarCampos;
 </script>
+
+
+
 
 </body>
 

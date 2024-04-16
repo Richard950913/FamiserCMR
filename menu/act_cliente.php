@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fec_nac = $_POST['fec_nac'] !== '' ? $_POST['fec_nac'] : null;
     $oficio = strtoupper($_POST['oficio']);
     $empresa = strtoupper($_POST['empresa']);
+    $acudiente = strtoupper($_POST['acudiente']);
     
     // Actualizar el registro en la base de datos
     $sql = "UPDATE clientes SET 
@@ -31,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 fec_nac = '$fec_nac', 
                 oficio = '$oficio', 
                 empresa = '$empresa' 
+                acudiente = '$acudiente' 
             WHERE idclientes = '$cliente_id'";
 
     if ($conn->query($sql) === TRUE) {

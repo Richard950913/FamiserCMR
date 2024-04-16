@@ -1,7 +1,7 @@
 <?php
 require "../conexion.php";
 
-$columns = ["idclientes", "tipoID", "numID", "nombresCL", "sexo", "lugar", "telefono1", "telefono2", "direccion", "email", "fec_nac", "oficio", "empresa"];
+$columns = ["idclientes", "tipoID", "numID", "nombresCL", "sexo", "lugar", "telefono1", "telefono2", "direccion", "email", "fec_nac", "oficio", "empresa", "acudiente"];
 $table = "clientes";
 
 $campo = isset($_POST["busqueda"]) ? $conn->real_escape_string($_POST["busqueda"]) : null;
@@ -39,13 +39,14 @@ if ($num_rows > 0) {
         $html .= '<td>' . $row['fec_nac'] . '</td>';
         $html .= '<td>' . $row['oficio'] . '</td>';
         $html .= '<td>' . $row['empresa'] . '</td>';
+        $html .= '<td>' . $row['acudiente'] . '</td>';
         $html .= '<td><a href="editar_cliente.php?id=' . $row['idclientes'] . '">Editar</a></td>';
         $html .= '<td><a href="#" onclick="eliminarCliente(' . $row['idclientes'] . ', \'' . addslashes($row['nombresCL']) . '\')">Eliminar</a></td>';
         $html .= '</tr>';
     }
 } else {
     $html .= '<tr>';
-    $html .= '<td colspan="15">Sin resultados</td>';
+    $html .= '<td colspan="16">Sin resultados</td>';
     $html .= '</tr>';
 }
 

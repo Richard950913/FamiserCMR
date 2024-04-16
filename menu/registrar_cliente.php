@@ -22,16 +22,17 @@ try {
     $fec_nac = $_POST['fec_nac'] !== '' ? $_POST['fec_nac'] : null;
     $oficio = strtoupper($_POST['oficio']);
     $empresa = strtoupper($_POST['empresa']);
+    $acudiente = strtoupper($_POST['acudiente']);
 
     // Preparar la consulta SQL con parámetros
-    $sql = "INSERT INTO clientes (tipoID, numID, nombresCL, sexo, lugar, telefono1, telefono2, direccion, email, fec_nac, oficio, empresa)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO clientes (tipoID, numID, nombresCL, sexo, lugar, telefono1, telefono2, direccion, email, fec_nac, oficio, empresa, acudiente)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     // Preparar la declaración
     $stmt = $conn->prepare($sql);
 
     // Vincular parámetros
-    $stmt->bind_param("sisssiississ", $tipoID, $numID, $nombresCL, $sexo, $lugar, $telefono1, $telefono2, $direccion, $email, $fec_nac, $oficio, $empresa);
+    $stmt->bind_param("sisssiissssss", $tipoID, $numID, $nombresCL, $sexo, $lugar, $telefono1, $telefono2, $direccion, $email, $fec_nac, $oficio, $empresa, $acudiente);
 
     // Ejecutar la consulta
     if ($stmt->execute()) {
