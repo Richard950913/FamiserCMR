@@ -102,9 +102,9 @@ include ("../validar_rol.php");
             <!-- Contenedor del campo de acudiente -->
             <div id="acudienteContainer" style="display: none;">
                 <label for="acudiente">Acudiente:</label>
-                <input type="text" id="acudiente" name="acudiente" style= "width:60%">
+                <input type="text" id="acudiente" name="acudiente" style="width:60%">
             </div>
-            
+
             <input type="submit" value="Registrar">
             <div id="mensaje-container" class="anuncio"></div>
         </form>
@@ -141,19 +141,72 @@ include ("../validar_rol.php");
             </tbody>
         </table>
     </div>
+
+
+    <div class="container">
+        <label for="cantidadRegistros">Mostrar:</label>
+        <select id="cantidadRegistros">
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+        </select>
+        registros
+
+        <div id="paginationButtons">
+            <button id="prevButton" disabled>Anterior</button>
+            <button id="nextButton" disabled>Siguiente</button>
+        </div>
+       
+
+    </div>
+    <span id="totalRegistrosSpan"></span>
+
     <!-- Incluir el archivo de scripts -->
     <script>
         //Busqueda cliente x AJAX
+        var inicio = 0; // Definir la variable inicio con un valor inicia
 
         getData(); // Llamada inicial para cargar los datos al cargar la página
         document.getElementById("busqueda").addEventListener("keyup", getData);
 
+
+        var cantidadRegistros = 10; // Por defecto, mostrar 10 registros
+        document.getElementById("cantidadRegistros").addEventListener("change", function () {
+            cantidadRegistros = parseInt(this.value);
+            getData();
+        });
+
+        document.getElementById("prevButton").addEventListener("click", function () {
+            inicio -= cantidadRegistros;
+            getData();
+        });
+
+        document.getElementById("nextButton").addEventListener("click", function () {
+            inicio += cantidadRegistros;
+            getData();
+        });
+
+        // Actualiza el estado de los botones de navegación
+        var totalRegistros = 0; // Define totalRegistros como una variable global
+
+        function actualizarBotonesNavegacion(totalRegistros) {
+            document.getElementById("prevButton").disabled = inicio <= 0;
+            document.getElementById("nextButton").disabled = inicio + cantidadRegistros >= totalRegistros;
+        }
+        // Función para actualizar el elemento que muestra el total de registros
+        function actualizarTotalRegistros() {
+            document.getElementById("totalRegistrosSpan").innerText = "Hay " + totalRegistros + " registros";
+        }
+
+        // Actualiza el contenido de la tabla y los botones de navegación
         function getData() {
             let input = document.getElementById("busqueda").value;
             let content = document.getElementById("content");
             let url = "loadcl.php";
             let formData = new FormData();
             formData.append('busqueda', input);
+            formData.append('inicio', inicio);
+            formData.append('cantidadRegistros', cantidadRegistros);
 
             fetch(url, {
                 method: 'POST',
@@ -163,12 +216,15 @@ include ("../validar_rol.php");
                 .then(data => {
                     if (data.html) {
                         content.innerHTML = data.html; // Actualiza el contenido de la tabla con el HTML recibido
+                        totalRegistros = data.totalRegistros; // Asigna el valor de totalRegistros devuelto por loadcl.php
                     } else {
                         console.log("No se recibió HTML en la respuesta JSON.");
                     }
+                    actualizarBotonesNavegacion(totalRegistros);
                 })
                 .catch(err => console.log(err));
         }
+
     </script>
     <script>
         // Función para validar el correo electrónico
@@ -286,36 +342,36 @@ include ("../validar_rol.php");
 
     <!-- verificar edad si es menor-->
     <script>
-    // Función para actualizar la visibilidad del campo de acudiente según la edad
-    function actualizarCampos() {
-        var fechaNacimiento = document.getElementById("fec_nac").value;
-        var hoy = new Date();
-        var fechaNacimiento = new Date(fechaNacimiento);
-        var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-        var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+        // Función para actualizar la visibilidad del campo de acudiente según la edad
+        function actualizarCampos() {
+            var fechaNacimiento = document.getElementById("fec_nac").value;
+            var hoy = new Date();
+            var fechaNacimiento = new Date(fechaNacimiento);
+            var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+            var mes = hoy.getMonth() - fechaNacimiento.getMonth();
 
-        if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-            edad--;
+            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+                edad--;
+            }
+
+            var acudienteContainer = document.getElementById("acudienteContainer");
+
+            if (edad < 18) {
+                acudienteContainer.style.display = "block";
+                document.getElementById("acudiente").required = true;
+            } else {
+                acudienteContainer.style.display = "none";
+                document.getElementById("acudiente").required = false;
+                document.getElementById("acudiente").value = ""; // Limpiar el valor si se oculta
+            }
         }
 
-        var acudienteContainer = document.getElementById("acudienteContainer");
+        // Asignar la función actualizarCampos al evento onchange del campo de fecha de nacimiento
+        document.getElementById("fec_nac").addEventListener("change", actualizarCampos);
 
-        if (edad < 18) {
-            acudienteContainer.style.display = "block";
-            document.getElementById("acudiente").required = true;
-        } else {
-            acudienteContainer.style.display = "none";
-            document.getElementById("acudiente").required = false;
-            document.getElementById("acudiente").value = ""; // Limpiar el valor si se oculta
-        }
-    }
-
-    // Asignar la función actualizarCampos al evento onchange del campo de fecha de nacimiento
-    document.getElementById("fec_nac").addEventListener("change", actualizarCampos);
-
-    // Llamar a la función actualizarCampos al cargar la página para asegurarse de que el campo se oculte inicialmente
-    window.onload = actualizarCampos;
-</script>
+        // Llamar a la función actualizarCampos al cargar la página para asegurarse de que el campo se oculte inicialmente
+        window.onload = actualizarCampos;
+    </script>
 
 
 

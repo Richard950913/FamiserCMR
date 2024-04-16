@@ -18,7 +18,17 @@ if ($campo != null) {
     $where .= ")";
 }
 
-$sql = "SELECT " . implode(", ", $columns) . " FROM $table $where ";
+// Obtener la cantidad de registros totales
+$sqlCount = "SELECT COUNT(*) as total FROM $table $where";
+$resultCount = $conn->query($sqlCount);
+$rowCount = $resultCount->fetch_assoc();
+$totalRegistros = $rowCount['total'];
+
+// Obtener el rango de registros a mostrar
+$inicio = isset($_POST['inicio']) ? intval($_POST['inicio']) : 0;
+$cantidadRegistros = isset($_POST['cantidadRegistros']) ? intval($_POST['cantidadRegistros']) : 10;
+
+$sql = "SELECT " . implode(", ", $columns) . " FROM $table $where LIMIT $inicio, $cantidadRegistros";
 $resultado = $conn->query($sql);
 $num_rows = $resultado->num_rows;
 
@@ -50,6 +60,6 @@ if ($num_rows > 0) {
     $html .= '</tr>';
 }
 
-// Devolver el HTML en un objeto JSON
-echo json_encode(array('html' => $html), JSON_UNESCAPED_UNICODE);
+// Devolver el HTML y la cantidad total de registros en un objeto JSON
+echo json_encode(array('html' => $html, 'totalRegistros' => $totalRegistros), JSON_UNESCAPED_UNICODE);
 ?>
