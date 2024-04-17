@@ -156,10 +156,13 @@ include ("../validar_rol.php");
             <button id="prevButton" disabled>Anterior</button>
             <button id="nextButton" disabled>Siguiente</button>
         </div>
-       
+        <!-- Contenedor para el total de registros -->
+        <div class="total-registros-container">
+            <span id="totalRegistrosSpan"></span>
+        </div>
 
     </div>
-    <span id="totalRegistrosSpan"></span>
+
 
     <!-- Incluir el archivo de scripts -->
     <script>
@@ -188,11 +191,13 @@ include ("../validar_rol.php");
 
         // Actualiza el estado de los botones de navegación
         var totalRegistros = 0; // Define totalRegistros como una variable global
-
-        function actualizarBotonesNavegacion(totalRegistros) {
+        totalRegistros = data.totalRegistros;
+        // Actualiza el estado de los botones de navegación
+        function actualizarBotonesNavegacion() {
             document.getElementById("prevButton").disabled = inicio <= 0;
             document.getElementById("nextButton").disabled = inicio + cantidadRegistros >= totalRegistros;
         }
+
         // Función para actualizar el elemento que muestra el total de registros
         function actualizarTotalRegistros() {
             document.getElementById("totalRegistrosSpan").innerText = "Hay " + totalRegistros + " registros";
@@ -217,6 +222,7 @@ include ("../validar_rol.php");
                     if (data.html) {
                         content.innerHTML = data.html; // Actualiza el contenido de la tabla con el HTML recibido
                         totalRegistros = data.totalRegistros; // Asigna el valor de totalRegistros devuelto por loadcl.php
+                        actualizarTotalRegistros(); // Actualiza el total de registros mostrado
                     } else {
                         console.log("No se recibió HTML en la respuesta JSON.");
                     }

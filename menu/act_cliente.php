@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 email = '$email', 
                 fec_nac = '$fec_nac', 
                 oficio = '$oficio', 
-                empresa = '$empresa' 
+                empresa = '$empresa', 
                 acudiente = '$acudiente' 
             WHERE idclientes = '$cliente_id'";
 
