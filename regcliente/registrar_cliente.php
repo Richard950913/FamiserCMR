@@ -24,26 +24,49 @@ try {
     $empresa = strtoupper($_POST['empresa']);
     $acudiente = strtoupper($_POST['acudiente']);
 
-    // Preparar la consulta SQL con parámetros
-    $sql = "INSERT INTO clientes (tipoID, numID, nombresCL, sexo, lugar, telefono1, telefono2, direccion, email, fec_nac, oficio, empresa, acudiente)
+    // Guardar el nombre de usuario actual
+    $usuario = $username;
+
+    // Preparar la consulta SQL con parámetros para insertar el cliente
+    $sql_insert_cliente = "INSERT INTO clientes (tipoID, numID, nombresCL, sexo, lugar, telefono1, telefono2, direccion, email, fec_nac, oficio, empresa, acudiente)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    // Preparar la declaración
-    $stmt = $conn->prepare($sql);
+    // Preparar la declaración para insertar el cliente
+    $stmt_insert_cliente = $conn->prepare($sql_insert_cliente);
 
-    // Vincular parámetros
-    $stmt->bind_param("sisssiissssss", $tipoID, $numID, $nombresCL, $sexo, $lugar, $telefono1, $telefono2, $direccion, $email, $fec_nac, $oficio, $empresa, $acudiente);
+    // Vincular parámetros para insertar el cliente
+    $stmt_insert_cliente->bind_param("sisssiissssss", $tipoID, $numID, $nombresCL, $sexo, $lugar, $telefono1, $telefono2, $direccion, $email, $fec_nac, $oficio, $empresa, $acudiente);
 
-    // Ejecutar la consulta
-    if ($stmt->execute()) {
+    // Ejecutar la consulta para insertar el cliente
+    if ($stmt_insert_cliente->execute()) {
+        // Registro exitoso del cliente, ahora registrar en la tabla de auditoría
+        $accion = "inserción";
+        $tabla_afectada = "clientes";
+        $detalle_cambio = "Nuevo cliente agregado: " . $nombresCL . " (" . $numID . ")";
+
+        // Preparar la consulta SQL para insertar el registro de auditoría
+        $sql_insert_auditoria = "INSERT INTO auditoria_registros (tabla_afectada, accion, usuario, detalle_cambio) VALUES (?, ?, ?, ?)";
+
+        // Preparar la declaración para insertar el registro de auditoría
+        $stmt_insert_auditoria = $conn->prepare($sql_insert_auditoria);
+
+        // Vincular parámetros para insertar el registro de auditoría
+        $stmt_insert_auditoria->bind_param("ssss", $tabla_afectada, $accion, $usuario, $detalle_cambio);
+
+        // Ejecutar la consulta para insertar el registro de auditoría
+        $stmt_insert_auditoria->execute();
+
+        // Establecer la respuesta de éxito
         $response['success'] = true;
         $response['message'] = 'Registro exitoso.';
     } else {
+        // Error al registrar el cliente
         $response['message'] = 'Error al registrar el cliente. Por favor, intente nuevamente más tarde.';
     }
 
 } catch (mysqli_sql_exception $e) {
     if ($e->getCode() == 1062) {
+        // Cliente con el número de identificación ya existe
         $response['message'] = "El cliente con el número de identificación '$numID' ya existe.";
     }
 }
@@ -52,6 +75,8 @@ try {
 header('Content-Type: application/json');
 echo json_encode($response);
 
-// Cerrar declaración y conexión
-$stmt->close();
+// Cerrar declaraciones y conexión
+$stmt_insert_cliente->close();
+$stmt_insert_auditoria->close();
+$conn->close();
 ?>
