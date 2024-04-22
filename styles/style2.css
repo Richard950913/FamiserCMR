@@ -118,9 +118,7 @@ form label {
     padding-right: 0%;
     
 }
-/*form label[for="numID"] {
-    padding-left: 13%;
-}*/
+
 
 form input[type="text"],
 form input[type="email"],
@@ -146,12 +144,13 @@ form input[type="submit"] {
 
 /* Estilos para el campo de búsqueda */
 #busqueda {
-    width: 35%;
+    transition: width 0.4s ease-in-out;
     padding: 10px;
     margin-top: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    background-image: url('searchicon.png');
 }
 
 /* Estilos para el botón de búsqueda */
@@ -174,7 +173,6 @@ form input[type="submit"] {
 
 /* Estilos para el select del formulario */
 .form-select {
-    width: 5%;
     padding: 3px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -183,15 +181,18 @@ form input[type="submit"] {
     outline: none; /* Elimina el contorno al seleccionar */
     background-color: #fff; /* Fondo blanco */
     color: #333; /* Color del texto */
+    width: auto; /* Ancho automático */
+    max-width: 100%; /* Ancho máximo del contenedor */
+    min-width: 100px; /* Ancho mínimo */
 }
 
 /* Estilos para las opciones del select */
+.form-select option[value=""] {
+    display: none; /* Ocultar opciones vacías */
+}
+
 .form-select option {
     background-color: #fff; /* Fondo blanco */
     color: #333; /* Color del texto */
 }
 
-/* Estilos cuando el select está enfocado */
-.form-select:focus {
-    border-color: #007bff; /* Cambia el color del borde al enfocar */
-}

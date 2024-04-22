@@ -47,8 +47,8 @@ include ("../validar_rol.php");
         <div class="dropdown">
             <button class="dropbtn">MENU</button>
             <div class="dropdown-content">
-                <a href="#">Registrar cliente</a>
-                <a href="#">Compra de lente</a>
+                <a href="../regcliente/registro_cliente_form.php">Registrar cliente</a>
+                <a href="../reglentes/registro_lentes_form.php">Compra de lente</a>
                 <a href="#">Compra de Credencial</a>
                 <a href="#">Abonos</a>
                 <a href="#">Garantias</a>
@@ -78,7 +78,7 @@ include ("../validar_rol.php");
             <label for="nombresCL">Nombres:</label>
             <input type="text" id="nombresCL" name="nombresCL" required>
             <label for="sexo">Sexo:</label>
-            <select name="sexo" id="sexo">
+            <select class="form-select" name="sexo" id="sexo">
                 <option value=""></option>
                 <option value="F">F</option>
                 <option value="M">M</option>
