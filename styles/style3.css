@@ -119,16 +119,29 @@ form label {
     
 }
 
-
-form input[type="text"],
-form input[type="email"],
 form input[type="number"],
-form input[type="tel"] {
+form input[type="text"] {
     width: calc(20% - 10px);
     padding: 4px;
     border: 1px solid #ccc;
     border-radius: 5px;
     
+}
+/* Estilos para el campo de formulario cuando está enfocado */
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none; /* Elimina el contorno predeterminado del enfoque */
+    border-color: #007bff; /* Cambia el color del borde al enfocar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Agrega un efecto de sombra al enfocar */
+}
+
+form textarea {
+    width: 70%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 150px;
 }
 
 form input[type="submit"] {

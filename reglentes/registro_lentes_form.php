@@ -54,7 +54,11 @@ include ("../validar_rol.php");
         <h2>COMPRA DE LENTES</h2>
         <form method="post" id=registro-form>
             <label for="cupolente"># de cupo:</label>
-            <input type="number" id="cupolente" name="cupolente" required>
+            <input type="number" id="cupolente" name="cupolente" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5">
+
+            <span id="cupo-validacion"></span>
+            <div style="margin-left: 100%;"></div>
+
             <label for="estado">Estado:</label>
             <select class="form-select" name="estado" id="estado" required>
                 <option value="PENDIENTE">Pendiente</option>
@@ -62,11 +66,12 @@ include ("../validar_rol.php");
                 <option value="DEVOLUCION">Devolución</option>
             </select>
             <label for="idcliente">Id cliente:</label>
-            <input type="number" id="idcliente" name="idcliente" required>
+            <input type="number" id="idcliente" name="idcliente" required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="15">
+
             <span id="icono-validacion"></span> <!-- Aquí se mostrará el icono de verificación o X -->
 
             <label for="fec_compra">Fecha de compra:</label>
-            <input type="date" id="fec_compra" name="fec_compra">
+            <input class="form-select" type="date" id="fec_compra" name="fec_compra">
             <label for="tipo_lente">Tipo de lente:</label>
             <select class="form-select" name="tipo_lente" id="tipo_lente" required>
                 <option value=""></option>
@@ -105,18 +110,20 @@ include ("../validar_rol.php");
                 <option value="CONTADO">Contado</option>
                 <option value="CREDITO">Crédito</option>
             </select>
+            <div style="margin-left: 100%;"></div>
             <label for="formula">FÓRMULA:</label>
-            <input type="text" id="formula" name="formula">
+            <input type="text" id="formula" name="formula" style="width: 70%;">
             <label for="optometra"> Optómetra</label>
-            <select name="optometra" id="optometra">
-
-
-            </select>
+            <select class="form-select" name="optometra" id="optometra"></select>
+            <div style="margin-left: 100%;"></div>
             <label for="comentarios">Comentarios:</label>
-            <input type="text" id="comentarios" name="comentarios">
+            <textarea id="comentarios" name="comentarios"></textarea>
 
-            <input type="submit" value="Registrar">
-            <div id="mensaje-container" class="anuncio"></div>
+            <div style="margin-left: 100%;"></div>
+
+            <!-- Botón de guardar -->
+            <input type="submit" value="Registrar" style="align-self: flex-start;">
+            
         </form>
     </div>
 
@@ -170,6 +177,41 @@ include ("../validar_rol.php");
         });
 
     </script>
+    <script>
+        //VERIFIICAR QUE EL CUPO EXISTA
+        var cupoInput = document.getElementById('cupolente');
+var cupoValidacion = document.getElementById('cupo-validacion');
+
+cupoInput.addEventListener('input', function () {
+    var cupo = cupoInput.value;
+
+    // Verificar si el valor del campo no está vacío
+    if (cupo.trim() !== '') {
+        // Realizar la solicitud AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'verificar_cupo.php?cupo=' + cupo, true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var respuesta = JSON.parse(xhr.responseText);
+                console.log(respuesta); // Imprime la respuesta en la consola
+                // Actualizar el mensaje de validación
+                if (respuesta.disponible) {
+                    cupoValidacion.textContent = 'Cupo disponible';
+                    cupoValidacion.style.color = 'green';
+                } else {
+                    cupoValidacion.textContent = 'Cupo ocupado';
+                    cupoValidacion.style.color = 'red';
+                }
+            }
+        };
+        xhr.send();
+    } else {
+        // Si el campo está vacío, elimina el mensaje de validación
+        cupoValidacion.textContent = '';
+    }
+});
+
+        </script>
 
 
 </body>

@@ -72,7 +72,7 @@ include ("../validar_rol.php");
                 <option value="Otro">Otro</option>
             </select>
             <label for="numID">Número de ID:</label>
-            <input type="number" id="numID" name="numID" required>
+            <input type="number" id="numID" name="numID" required required oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="15">
             <span id="clienteExistenteMsg" style="color: red;"></span>
             <img id="clienteExistenteIcon" src="../images/check.svg" alt="Cliente disponible" style="display: none;">
             <label for="nombresCL">Nombres:</label>
