@@ -173,7 +173,7 @@ form input[type="submit"] {
 
 /* Estilos para el select del formulario */
 .form-select {
-    padding: 3px;
+    padding: 1px;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
@@ -181,7 +181,7 @@ form input[type="submit"] {
     outline: none; /* Elimina el contorno al seleccionar */
     background-color: #fff; /* Fondo blanco */
     color: #333; /* Color del texto */
-    width: auto; /* Ancho automático */
+    width: 20%; /* Ancho automático */
     max-width: 100%; /* Ancho máximo del contenedor */
     min-width: 100px; /* Ancho mínimo */
 }

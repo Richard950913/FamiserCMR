@@ -11,6 +11,9 @@ include ("../validar_rol.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styles/style3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" />
+
     <title>Dashboard</title>
 
 </head>
@@ -49,7 +52,7 @@ include ("../validar_rol.php");
     </div>
     <div class="container">
         <h2>COMPRA DE LENTES</h2>
-        <form method="post" action="busqopto.php" id=registro-form>
+        <form method="post" id=registro-form>
             <label for="cupolente"># de cupo:</label>
             <input type="number" id="cupolente" name="cupolente" required>
             <label for="estado">Estado:</label>
@@ -60,6 +63,8 @@ include ("../validar_rol.php");
             </select>
             <label for="idcliente">Id cliente:</label>
             <input type="number" id="idcliente" name="idcliente" required>
+            <span id="icono-validacion"></span> <!-- Aquí se mostrará el icono de verificación o X -->
+
             <label for="fec_compra">Fecha de compra:</label>
             <input type="date" id="fec_compra" name="fec_compra">
             <label for="tipo_lente">Tipo de lente:</label>
@@ -79,7 +84,7 @@ include ("../validar_rol.php");
                 <option value="TRANSITION ">TRANSITION</option>
             </select>
             <label for="graduacion">Graduacióm:</label>
-            <select class="form-select" name="filtro" id="filtro" required>
+            <select class="form-select" name="graduacion" id="graduacion" required>
                 <option value=""></option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -103,8 +108,9 @@ include ("../validar_rol.php");
             <label for="formula">FÓRMULA:</label>
             <input type="text" id="formula" name="formula">
             <label for="optometra"> Optómetra</label>
-            <select name="opcion">
-                <?php echo $options; ?>
+            <select name="optometra" id="optometra">
+
+
             </select>
             <label for="comentarios">Comentarios:</label>
             <input type="text" id="comentarios" name="comentarios">
@@ -113,3 +119,59 @@ include ("../validar_rol.php");
             <div id="mensaje-container" class="anuncio"></div>
         </form>
     </div>
+
+
+    <script>
+
+        //SCRIPT PARA TRAER LOS NOMBRES DE OPTOMETRAS
+        window.addEventListener('DOMContentLoaded', function () {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'busqopto.php', true);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    var select = document.getElementById('optometra');
+                    select.innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        });
+
+    </script>
+    <script>
+        //VERIFICA QUE EXISTA EL CLIENTE
+        var idClienteInput = document.getElementById('idcliente');
+        var iconoValidacion = document.getElementById('icono-validacion');
+
+        idClienteInput.addEventListener('input', function () {
+            var idCliente = idClienteInput.value;
+
+            // Verificar si el valor del campo no está vacío
+            if (idCliente.trim() !== '') {
+                // Realizar la solicitud AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'verificar_cliente.php?id=' + idCliente, true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var respuesta = JSON.parse(xhr.responseText);
+                        console.log(respuesta); // Imprime la respuesta en la consola
+                        // Actualizar el icono de validación
+                        if (respuesta.existe) {
+                            iconoValidacion.innerHTML = '<i class="fas fa-check-circle" style="color:green;"></i>';
+                        } else {
+                            iconoValidacion.innerHTML = '<i class="fas fa-times-circle" style="color:red;"></i>';
+                        }
+                    }
+                };
+                xhr.send();
+            } else {
+                // Si el campo está vacío, elimina el icono de validación
+                iconoValidacion.innerHTML = '';
+            }
+        });
+
+    </script>
+
+
+</body>
+
+</html>
