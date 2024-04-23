@@ -30,7 +30,7 @@ include("sesion.php");
         <div class="dropdown">
             <button class="dropbtn">MENU</button>
             <div class="dropdown-content">
-                <a href="menu\registro_cliente_form.php">Registrar cliente</a>
+                <a href="regcliente\registro_cliente_form.php">Registrar cliente</a>
                 <a href="#">Compra de lente</a>
                 <a href="#">Compra de Credencial</a>
                 <a href="#">Abonos</a>
