@@ -31,7 +31,7 @@ include("sesion.php");
             <button class="dropbtn">MENU</button>
             <div class="dropdown-content">
                 <a href="regcliente\registro_cliente_form.php">Registrar cliente</a>
-                <a href="#">Compra de lente</a>
+                <a href="reglentes/registro_lentes_form.php">Compra de lente</a>
                 <a href="#">Compra de Credencial</a>
                 <a href="#">Abonos</a>
                 <a href="#">Garantias</a>
