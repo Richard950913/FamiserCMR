@@ -1,7 +1,7 @@
 <?php
-include ("../conexion.php");
-include ("../sesion.php");
-include ("../validar_rol.php");
+include ("../../conn/conexion.php");
+include ("../../conn/sesion.php");
+include ("../../conn/validar_rol.php");
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ include ("../validar_rol.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/style2.css">
+    <link rel="stylesheet" href="../../styles/style2.css">
     <title>Dashboard</title>
     <style>
         table,
@@ -28,7 +28,7 @@ include ("../validar_rol.php");
 
 <body>
     <div class="dashboard-container">
-        <img class="logo" src="../images/LOGO.png" alt="Logo">
+        <img class="logo" src="../../images/LOGO.png" alt="Logo">
         <div class="user-info">
             <p>Bienvenido,
                 <?php echo $username; ?>
@@ -43,12 +43,12 @@ include ("../validar_rol.php");
     <div class="dashboard-container">
     </div>
     <div class="menu-bar">
-        <a href="../dashboard.php">INICIO</a>
+        <a href="../../dashboard.php">INICIO</a>
         <div class="dropdown">
             <button class="dropbtn">MENU</button>
             <div class="dropdown-content">
-                <a href="../regcliente/registro_cliente_form.php">Registrar cliente</a>
-                <a href="../reglentes/registro_lentes_form.php">Compra de lente</a>
+                <a href="../../pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
+                <a href="../../pages/reglentes/registro_lentes_form.php">Compra de lente</a>
                 <a href="#">Compra de Credencial</a>
                 <a href="#">Abonos</a>
                 <a href="#">Garantias</a>

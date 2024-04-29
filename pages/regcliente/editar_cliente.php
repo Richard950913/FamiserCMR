@@ -1,5 +1,5 @@
 <?php
-include ("../conexion.php");
+include ("../../conn/conexion.php");
 
 // Verificar si se proporcionó un ID de cliente válido en la URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -20,7 +20,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Editar Cliente</title>
-            <link rel="stylesheet" href="../styles/style2.css">
+            <link rel="stylesheet" href="../../styles/style2.css">
         </head>
 
         <body>

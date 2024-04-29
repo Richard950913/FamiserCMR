@@ -1,5 +1,5 @@
 <?php
-include("../conexion.php");
+include("../../conn/conexion.php");
 
 // Consulta para obtener los datos de la tabla opciones
 $sql = "SELECT nombres FROM optometras";

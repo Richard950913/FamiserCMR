@@ -1,5 +1,5 @@
 <?php
-require "../conexion.php";
+require "../../conn/conexion.php";
 
 $columns = ["idclientes", "tipoID", "numID", "nombresCL", "sexo", "lugar", "telefono1", "telefono2", "direccion", "email", "fec_nac", "oficio", "empresa", "acudiente"];
 $table = "clientes";

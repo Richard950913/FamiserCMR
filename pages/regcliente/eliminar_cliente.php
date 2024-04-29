@@ -1,6 +1,6 @@
 <?php
-include("../conexion.php");
-include("../sesion.php");
+include("../../conn/conexion.php");
+include("../../conn/sesion.php");
 
 if (isset($_POST['id']) && !empty($_POST['id'])) {
     $cliente_id = $_POST['id'];

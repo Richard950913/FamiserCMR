@@ -1,6 +1,6 @@
 <?php
 // Incluir el archivo de conexión
-include 'conexion.php';
+include 'conn/conexion.php';
 
 //Recibir datos del formulario
 $username = $_POST['username'];

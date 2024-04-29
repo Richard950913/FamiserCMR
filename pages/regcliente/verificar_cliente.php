@@ -1,5 +1,5 @@
 <?php
-include("../conexion.php");
+include("../../conn/conexion.php");
 
 if (isset($_POST['numID'])) {
     $numID = $_POST['numID'];

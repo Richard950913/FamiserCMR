@@ -1,5 +1,5 @@
 <?php
-include("../conexion.php");
+include("../../conn/conexion.php");
 
 // Obtener el número de cupo de la solicitud AJAX
 $cupo = isset($_GET['cupo']) ? $_GET['cupo'] : '';

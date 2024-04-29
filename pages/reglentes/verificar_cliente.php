@@ -1,5 +1,5 @@
 <?php
-include("../conexion.php");
+include("../../conn/conexion.php");
 
 // Obtener el ID del cliente de la solicitud AJAX
 $idCliente = isset($_GET['id']) ? $_GET['id'] : '';

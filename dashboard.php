@@ -1,5 +1,5 @@
 <?php
-include("sesion.php");
+include("conn/sesion.php");
 ?>
 
 <!DOCTYPE html>
@@ -30,8 +30,8 @@ include("sesion.php");
         <div class="dropdown">
             <button class="dropbtn">MENU</button>
             <div class="dropdown-content">
-                <a href="regcliente\registro_cliente_form.php">Registrar cliente</a>
-                <a href="reglentes/registro_lentes_form.php">Compra de lente</a>
+                <a href="pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
+                <a href="pages/reglentes/registro_lentes_form.php">Compra de lente</a>
                 <a href="#">Compra de Credencial</a>
                 <a href="#">Abonos</a>
                 <a href="#">Garantias</a>
@@ -41,7 +41,7 @@ include("sesion.php");
         </div>
         <a href="#">SOPORTE</a>
     </div>
-    <script src="script.js"></script>
+    
 </body>
 </html>
 

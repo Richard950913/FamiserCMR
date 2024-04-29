@@ -1,6 +1,6 @@
 <?php
-include("../conexion.php");
-include("../sesion.php");
+include("../../conn/conexion.php");
+include("../../conn/sesion.php");
 
 // Inicializar la respuesta predeterminada
 $response = array(

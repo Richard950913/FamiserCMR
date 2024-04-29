@@ -132,7 +132,7 @@ form input:focus,
 form textarea:focus,
 form select:focus {
     outline: none; /* Elimina el contorno predeterminado del enfoque */
-    border-color: #007bff; /* Cambia el color del borde al enfocar */
+    border-color: #105daf; /* Cambia el color del borde al enfocar */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Agrega un efecto de sombra al enfocar */
 }
 
@@ -154,6 +154,7 @@ form input[type="submit"] {
     font-weight: bold;
     cursor: pointer;
 }
+
 
 /* Estilos para el campo de búsqueda */
 #busqueda {
