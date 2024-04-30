@@ -63,18 +63,70 @@ function eliminarCliente(id, nombre) {
 //------------------------------FIN ELIMINAR CLIENTE----------------------------------------------
 
 //------------------------BUSQUEDA DE CLIENTE X AJAX------------------------------------------
-var inicio = 0; // Definir la variable inicio con un valor inicia
+var inicio = 0;
+var cantidadRegistros = 10;
+var totalRegistros = 0;
 
-getData(); // Llamada inicial para cargar los datos al cargar la página
+// Función de carga inicial de la página
+window.onload = function () {
+    actualizarBotonesNavegacion();
+    actualizarTotalRegistros();
+    getData();
+};
+
+// Función para actualizar el estado de los botones de navegación
+function actualizarBotonesNavegacion() {
+    var prevButton = document.getElementById("prevButton");
+    var nextButton = document.getElementById("nextButton");
+
+    prevButton.disabled = inicio <= 0;
+    nextButton.disabled = inicio + cantidadRegistros >= totalRegistros;
+}
+
+// Función para actualizar el elemento que muestra el total de registros
+function actualizarTotalRegistros() {
+    var totalRegistrosSpan = document.getElementById("totalRegistrosSpan");
+    totalRegistrosSpan.innerText = "Hay " + totalRegistros + " registros";
+}
+
+// Función para obtener los datos mediante AJAX
+function getData() {
+    var input = document.getElementById("busqueda").value;
+    var content = document.getElementById("content");
+    var url = "loadcl.php";
+    var formData = new FormData();
+    formData.append('busqueda', input);
+    formData.append('inicio', inicio);
+    formData.append('cantidadRegistros', cantidadRegistros);
+
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.html) {
+            content.innerHTML = data.html;
+            totalRegistros = data.totalRegistros;
+            actualizarTotalRegistros();
+            actualizarBotonesNavegacion();
+        } else {
+            console.log("No se recibió HTML en la respuesta JSON.");
+        }
+    })
+    .catch(err => console.log(err));
+}
+
+// Escuchar eventos para cambios en la búsqueda y cantidad de registros
 document.getElementById("busqueda").addEventListener("keyup", getData);
 
-
-var cantidadRegistros = 10; // Por defecto, mostrar 10 registros
 document.getElementById("cantidadRegistros").addEventListener("change", function () {
     cantidadRegistros = parseInt(this.value);
+    inicio = 0; // Reiniciar inicio al cambiar la cantidad de registros
     getData();
 });
 
+// Eventos para navegación entre páginas de resultados
 document.getElementById("prevButton").addEventListener("click", function () {
     inicio -= cantidadRegistros;
     getData();
@@ -84,51 +136,6 @@ document.getElementById("nextButton").addEventListener("click", function () {
     inicio += cantidadRegistros;
     getData();
 });
-
-// Actualiza el estado de los botones de navegación
-var totalRegistros = 0; // Define totalRegistros como una variable global
-totalRegistros = data.totalRegistros;
-// Actualiza el estado de los botones de navegación
-function actualizarBotonesNavegacion() {
-    document.getElementById("prevButton").disabled = inicio <= 0;
-    document.getElementById("nextButton").disabled = inicio + cantidadRegistros >= totalRegistros;
-}
-
-// Función para actualizar el elemento que muestra el total de registros
-function actualizarTotalRegistros() {
-    document.getElementById("totalRegistrosSpan").innerText = "Hay " + totalRegistros + " registros";
-}
-
-// Actualiza el contenido de la tabla y los botones de navegación
-function getData() {
-    let input = document.getElementById("busqueda").value;
-    let content = document.getElementById("content");
-    let url = "loadcl.php";
-    let formData = new FormData();
-    formData.append('busqueda', input);
-    formData.append('inicio', inicio);
-    formData.append('cantidadRegistros', cantidadRegistros);
-
-    fetch(url, {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            if (data.html) {
-                content.innerHTML = data.html; // Actualiza el contenido de la tabla con el HTML recibido
-                totalRegistros = data.totalRegistros; // Asigna el valor de totalRegistros devuelto por loadcl.php
-                actualizarTotalRegistros(); // Actualiza el total de registros mostrado
-            } else {
-                console.log("No se recibió HTML en la respuesta JSON.");
-            }
-            actualizarBotonesNavegacion(totalRegistros);
-        })
-        .catch(err => console.log(err));
-}
-window.onload = actualizarBotonesNavegacion;
-window.onload = actualizarTotalRegistros;
-window.onload = getData;
 
 //------------------------FIN BUSQUEDA DE CLIENTE X AJAX------------------------------------------
 
@@ -149,5 +156,3 @@ function validarEmail() {
 }
 window.onload = validarEmail;
 //----------------------------FIN VALIDAR EL CORREO ELECTRONICO----------------------------
-
-

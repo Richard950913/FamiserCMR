@@ -165,7 +165,8 @@ include ("../../conn/validar_rol.php");
 
     </div>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
 
     <script>
         //---------- Funcion de Ajax para verificar el cliente existente automaticamente --------------------
@@ -229,8 +230,7 @@ include ("../../conn/validar_rol.php");
         });
         //--------------- Fin Script de jQuery para enviar los datos del formulario mediante AJAX ---------------------
     </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/main.js"></script>
+
 </body>
 
 </html>
