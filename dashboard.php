@@ -32,11 +32,11 @@ include("conn/sesion.php");
             <div class="dropdown-content">
                 <a href="pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
                 <a href="pages/reglentes/registro_lentes_form.php">Compra de lente</a>
-                <a href="#">Compra de Credencial</a>
-                <a href="#">Abonos</a>
-                <a href="#">Garantias</a>
-                <a href="#">Incidentes</a>
-                <a href="#">Proceso de Lentes</a>
+                <a href="pages/regplan/registro_plan_form.php">Compra de Credencial</a>
+                <a href="pages/">Abonos</a>
+                <a href="pages/">Garantias</a>
+                <a href="pages/">Incidentes</a>
+                <a href="pages/">Proceso de Lentes</a>
             </div>
         </div>
         <a href="#">SOPORTE</a>

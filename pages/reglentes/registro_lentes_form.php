@@ -47,13 +47,13 @@ include("../../conn/validar_rol.php");
         <div class="dropdown">
             <button class="dropbtn">MENU</button>
             <div class="dropdown-content">
-                <a href="../../pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
+            <a href="../../pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
                 <a href="../../pages/reglentes/registro_lentes_form.php">Compra de lente</a>
-                <a href="#">Compra de Credencial</a>
-                <a href="#">Abonos</a>
-                <a href="#">Garantias</a>
-                <a href="#">Incidentes</a>
-                <a href="#">Proceso de Lentes</a>
+                <a href="../../pages/regplan/registro_plan_form.php">Compra de Credencial</a>
+                <a href="../../pages/regabonos/registro_abonos_form.php">Abonos</a>
+                <a href="../../pages/reggarantias/registro_garantias_form.php">Garantias</a>
+                <a href="../../pages/regincidentes/registro_incidentes_form.php">Incidentes</a>
+                <a href="../../pages/regprocesos/registro_procesos_form.php">Proceso de Lentes</a>
             </div>
         </div>
         <a href="#">SOPORTE</a>
@@ -135,16 +135,16 @@ include("../../conn/validar_rol.php");
 
             <!-- Botón de guardar -->
             <input type="submit" value="Registrar">
-            <div id="mensaje-container"></div>
-            <div style="margin-left: 100%;"></div>
-            <input type="submit" value="limpiar" onclick="limpiarCampos()" style="background-color: #750303;">
             
+            <div style="margin-left: 65%;"></div>
+            <input type="submit" value="limpiar" onclick="limpiarCampos()" style="background-color: #750303;">
+            <div id="mensaje-container"></div>
         </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
-    
+
    </body>
 
 </html>
