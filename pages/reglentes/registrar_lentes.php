@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario = $username; // Obtén el nombre de usuario actual desde la sesión
             $tabla_afectada = "compra_lentes"; // Nombre de la tabla afectada
             $accion = "inserción"; // Acción realizada
-            $detalle_cambio = "Nueva registro, cupo #" . $cupolente; // Detalle de la acción
+            $detalle_cambio = "Nuevo registro, cupo #" . $cupolente; // Detalle de la acción
             
             // Insertar el registro en la tabla de auditoría
             $sql_auditoria = "INSERT INTO auditoria_registros (tabla_afectada, accion, usuario, detalle_cambio) 
