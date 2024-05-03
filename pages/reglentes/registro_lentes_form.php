@@ -135,8 +135,6 @@ include("../../conn/validar_rol.php");
 
             <!-- Botón de guardar -->
             <input type="submit" value="Registrar">
-            
-            <div style="margin-left: 65%;"></div>
             <input type="submit" value="limpiar" onclick="limpiarCampos()" style="background-color: #750303;">
             <div id="mensaje-container"></div>
         </form>

@@ -47,7 +47,7 @@ include ("../../conn/validar_rol.php");
         <div class="dropdown">
             <button class="dropbtn">MENU</button>
             <div class="dropdown-content">
-            <a href="../../pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
+                <a href="../../pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
                 <a href="../../pages/reglentes/registro_lentes_form.php">Compra de lente</a>
                 <a href="../../pages/regplan/registro_plan_form.php">Compra de Credencial</a>
                 <a href="../../pages/regabonos/registro_abonos_form.php">Abonos</a>
@@ -106,9 +106,11 @@ include ("../../conn/validar_rol.php");
                 <label for="acudiente">Acudiente:</label>
                 <input type="text" id="acudiente" name="acudiente" style="width:60%">
             </div>
-
-            <input type="submit" value="Registrar">
             <div id="mensaje-container" class="anuncio"></div>
+            <input type="submit" value="Registrar">
+            <div style="margin-left: 65%;"></div>
+            <input type="submit" value="limpiar" onclick="limpiarCampos()" style="background-color: #750303;">
+
         </form>
     </div>
 
@@ -169,7 +171,7 @@ include ("../../conn/validar_rol.php");
     <script src="js/main.js"></script>
     <script src="js/reg.js"></script>
 
-    
+
 
 </body>
 

@@ -23,7 +23,10 @@ function actualizarCampos() {
         document.getElementById("acudiente").value = ""; // Limpiar el valor si se oculta
     }
 }
-
+// Función para limpiar los campos del formulario
+function limpiarCampos() {
+    document.getElementById("registro-form").reset();
+}
 // Asignar la función actualizarCampos al evento onchange del campo de fecha de nacimiento
 document.getElementById("fec_nac").addEventListener("change", actualizarCampos);
 
