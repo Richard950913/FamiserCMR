@@ -107,6 +107,7 @@ include ("../../conn/validar_rol.php");
                 <input type="text" id="acudiente" name="acudiente" style="width:60%">
             </div>
             <div id="mensaje-container" class="anuncio"></div>
+            <div style="display: block;"></div>
             <input type="submit" value="Registrar">
             <div style="margin-left: 65%;"></div>
             <input type="submit" value="limpiar" onclick="limpiarCampos()" style="background-color: #750303;">

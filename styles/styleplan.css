@@ -98,6 +98,28 @@
     display: block;
 }
 
+table {
+    width: 100%;
+    border: 1px solid #000;
+ }
+ th, td {
+    width: 25%;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #000;
+    border-collapse: collapse;
+    padding: 0.3em;
+    caption-side: bottom;
+ }
+ caption {
+    padding: 0.3em;
+    color: #fff;
+     background: #000;
+ }
+ th {
+    background: #eee;
+ }
+ 
 /* Estilos para el contenedor del formulario */
 .container {
     max-width: auto;
@@ -201,8 +223,7 @@ form label[for="comentarios"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    background-image: url('searchicon.png');
-}
+   }
 
 /* Estilos para el botón de búsqueda */
 #buscarBtn {
@@ -271,3 +292,4 @@ form label[for="comentarios"] {
     color: #333;
     /* Color del texto */
 }
+

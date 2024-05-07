@@ -75,8 +75,8 @@ include ("../../conn/validar_rol.php");
                     <option value="CANCELADO">Cancelado</option>
                     <option value="DEVOLUCION">Devolución</option>
                 </select>
-                <label for="fec_vinculacion">Fecha de vinculación:</label>
-                <input class="form-select main" class="main" type="date" id="fec_vinculacion" name="fec_vinculacion"
+                <label for="fecha_vinc">Fecha de vinculación:</label>
+                <input class="form-select main" class="main" type="date" id="fecha_vinc" name="fecha_vinc"
                     required>
                 <label for="tipo_plan">Tipo de plan:</label>
                 <select class="form-select main" name="tipo_plan" id="tipo_plan" required
@@ -88,10 +88,10 @@ include ("../../conn/validar_rol.php");
                 <div style="display: block;">
                     <label for="id_titular">ID del titular:</label>
                     <input type="number" class="main" id="id_titular" name="id_titular" required
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                maxlength="15">
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        maxlength="15">
 
-            <span id="icono-validacion"></span> <!-- Aquí se mostrará el icono de verificación o X -->
+                    <span id="icono-validacion"></span> <!-- Aquí se mostrará el icono de verificación o X -->
                     <div style="display: block;">
                         <label for="valor_total">Valor total:</label>
                         <input type="number" class="main" id="valor_total" name="valor_total">
@@ -103,66 +103,66 @@ include ("../../conn/validar_rol.php");
                         </select>
                         <div style="margin-left: 100%;"></div>
                         <!-- Persona 1 -->
-                        <label for="persona1">Persona 1:</label>
-                        <input type="text" id="persona1" name="persona1">
+                        <label for="nombres1">Persona 1:</label>
+                        <input type="text" id="nombres1" name="nombres1">
                         <label for="fec_nac1">Fecha de nacimiento 1:</label>
                         <input class="form-select" type="date" id="fec_nac1" name="fec_nac1">
-                        <label for="parentesco1">Parentesco 1:</label>
-                        <input type="text" id="parentesco1" name="parentesco1">
+                        <label for="parent1">Parentesco 1:</label>
+                        <input type="text" id="parent1" name="parent1">
                         <div style="margin-left: 100%;"></div>
                         <!-- Persona 2 -->
-                        <label for="persona2">Persona 2:</label>
-                        <input type="text" id="persona2" name="persona2">
+                        <label for="nombres2">Persona 2:</label>
+                        <input type="text" id="nombres2" name="nombres2">
                         <label for="fec_nac2">Fecha de nacimiento 2:</label>
                         <input class="form-select" type="date" id="fec_nac2" name="fec_nac2">
-                        <label for="parentesco2">Parentesco 2:</label>
-                        <input type="text" id="parentesco2" name="parentesco2">
+                        <label for="parent2">Parentesco 2:</label>
+                        <input type="text" id="parent2" name="parent2">
                         <div style="margin-left: 100%;"></div>
 
                         <!-- Persona 3 -->
-                        <label for="persona3">Persona 3:</label>
-                        <input type="text" id="persona3" name="persona3">
+                        <label for="nombres3">Persona 3:</label>
+                        <input type="text" id="nombres3" name="nombres3">
                         <label for="fec_nac3">Fecha de nacimiento 3:</label>
                         <input class="form-select" type="date" id="fec_nac3" name="fec_nac3">
-                        <label for="parentesco3">Parentesco 3:</label>
-                        <input type="text" id="parentesco3" name="parentesco3">
+                        <label for="parent3">Parentesco 3:</label>
+                        <input type="text" id="parent3" name="parent3">
                         <div style="margin-left: 100%;"></div>
 
                         <div class="extra-personas">
                             <!-- Persona 4 -->
-                            <label for="persona4">Persona 4:</label>
-                            <input type="text" id="persona4" name="persona4">
+                            <label for="nombres4">Persona 4:</label>
+                            <input type="text" id="nombres4" name="nombres4">
                             <label for="fec_nac4">Fecha de nacimiento 4:</label>
                             <input class="form-select" type="date" id="fec_nac4" name="fec_nac4">
-                            <label for="parentesco4">Parentesco 4:</label>
-                            <input type="text" id="parentesco4" name="parentesco4">
+                            <label for="parent4">Parentesco 4:</label>
+                            <input type="text" id="parent4" name="parent4">
                             <div style="margin-left: 100%;"></div>
 
                             <!-- Persona 5 -->
-                            <label for="persona5">Persona 5:</label>
-                            <input type="text" id="persona5" name="persona5">
+                            <label for="nombres5">Persona 5:</label>
+                            <input type="text" id="nombres5" name="nombres5">
                             <label for="fec_nac5">Fecha de nacimiento 5:</label>
                             <input class="form-select" type="date" id="fec_nac5" name="fec_nac5">
-                            <label for="parentesco5">Parentesco 5:</label>
-                            <input type="text" id="parentesco5" name="parentesco5">
+                            <label for="parent5">Parentesco 5:</label>
+                            <input type="text" id="parent5" name="parent5">
                             <div style="margin-left: 100%;"></div>
 
                             <!-- Persona 6 -->
-                            <label for="persona6">Persona 6:</label>
-                            <input type="text" id="persona6" name="persona6">
+                            <label for="nombres6">Persona 6:</label>
+                            <input type="text" id="nombres6" name="nombres6">
                             <label for="fec_nac6">Fecha de nacimiento 6:</label>
                             <input class="form-select" type="date" id="fec_nac6" name="fec_nac6">
-                            <label for="parentesco6">Parentesco 6:</label>
-                            <input type="text" id="parentesco6" name="parentesco6">
+                            <label for="parent6">Parentesco 6:</label>
+                            <input type="text" id="parent6" name="parent6">
                             <div style="margin-left: 100%;"></div>
 
                             <!-- Persona 7 -->
-                            <label for="persona7">Persona 7:</label>
-                            <input type="text" id="persona7" name="persona7">
+                            <label for="nombres7">Persona 7:</label>
+                            <input type="text" id="nombres7" name="nombres7">
                             <label for="fec_nac7">Fecha de nacimiento 7:</label>
                             <input class="form-select" type="date" id="fec_nac7" name="fec_nac7">
-                            <label for="parentesco7">Parentesco 7:</label>
-                            <input type="text" id="parentesco7" name="parentesco7">
+                            <label for="parent7">Parentesco 7:</label>
+                            <input type="text" id="parent7" name="parent7">
                             <div style="margin-left: 100%;"></div>
                         </div>
 
@@ -175,6 +175,7 @@ include ("../../conn/validar_rol.php");
 
                             <!-- Contenedor para mostrar mensajes -->
                             <div id="mensaje-container"></div>
+                            <div style="display: block;"></div>
                             <!-- Botones: Guardar y Limpiar -->
                             <div style="margin-left: 100%;"></div>
                             <input type="submit" value="Registrar" class="btn-registrar">
@@ -200,17 +201,32 @@ include ("../../conn/validar_rol.php");
                 <th>ID Titular</th>
                 <th>Valor</th>
                 <th>Medio Pago</th>
-                
                 <th></th>
                 <th></th>
             </thead>
-
             <tbody id="content">
-
             </tbody>
         </table>
     </div>
-   
+<div class="container">
+        <label for="cantidadRegistros">Mostrar:</label>
+        <select id="cantidadRegistros">
+            <option value="10" selected>10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+        </select>
+        registros
+
+        <div id="paginationButtons">
+            <button id="prevButton" disabled>Anterior</button>
+            <button id="nextButton" disabled>Siguiente</button>
+        </div>
+        <!-- Contenedor para el total de registros -->
+        <div class="total-registros-container">
+            <span id="totalRegistrosSpan"></span>
+        </div>
+
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/DOM.js"></script>

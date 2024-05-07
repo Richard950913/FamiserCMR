@@ -150,7 +150,7 @@ form input[type="submit"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    background-image: url('searchicon.png');
+    
 }
 
 /* Estilos para el botón de búsqueda */
@@ -195,4 +195,5 @@ form input[type="submit"] {
     background-color: #fff; /* Fondo blanco */
     color: #333; /* Color del texto */
 }
+
 

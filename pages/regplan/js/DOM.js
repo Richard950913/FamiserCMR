@@ -62,4 +62,37 @@ document.addEventListener('DOMContentLoaded', function() {
             iconoValidacion.innerHTML = '';
         }
     });
+
+    //----------------REGISTRO PLAN AJAX------------------------
+    $(document).ready(function () {
+        $('#registro-form').submit(function (event) {
+            event.preventDefault(); // Evitar el envío del formulario por defecto
+    
+            var messageContainer = $('#mensaje-container'); // Obtener el elemento mensaje-container
+    
+            $.ajax({
+                type: 'POST',
+                url: 'registro_plan.php', // Ruta al archivo PHP que maneja el registro
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    // Mostrar mensaje de éxito o error
+                    if (response.success) {
+                        messageContainer.text(response.message).css('color', 'green');
+                        // Limpiar el formulario después de un registro exitoso
+                        $('#registro-form')[0].reset();
+                    } else {
+                        messageContainer.text(response.message).css('color', 'red');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Mostrar mensaje de error en el contenedor
+                    messageContainer.text('Error al procesar la solicitud: ' + error).css('color', 'red');
+                    console.error('Error en la solicitud AJAX:', xhr.responseText);
+                }
+            });
+        });
+    });
+    
+// --------------------------FIN REGISTRO PLAN AJAX ---------------------------    
 });
