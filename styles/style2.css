@@ -142,6 +142,8 @@ form input[type="submit"] {
     cursor: pointer;
 }
 
+
+
 /* Estilos para el campo de búsqueda */
 #busqueda {
     transition: width 0.4s ease-in-out;
@@ -151,18 +153,6 @@ form input[type="submit"] {
     border-radius: 5px;
     box-sizing: border-box;
     
-}
-
-/* Estilos para el botón de búsqueda */
-#buscarBtn {
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
 }
 
 /* Estilos para la etiqueta del formulario */

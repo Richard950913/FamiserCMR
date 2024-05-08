@@ -64,6 +64,10 @@ function actualizarTotalRegistros() {
 }
 
 // Función para obtener los datos mediante AJAX
+
+// Escuchar eventos para cambios en la búsqueda y cantidad de registros
+document.getElementById("busqueda").addEventListener("keyup", getData);
+
 function getData() {
     var input = document.getElementById("busqueda").value;
     var content = document.getElementById("content");
@@ -91,8 +95,7 @@ function getData() {
     .catch(err => console.log(err));
 }
 
-// Escuchar eventos para cambios en la búsqueda y cantidad de registros
-document.getElementById("busqueda").addEventListener("keyup", getData);
+
 
 document.getElementById("cantidadRegistros").addEventListener("change", function () {
     cantidadRegistros = parseInt(this.value);
@@ -112,3 +115,34 @@ document.getElementById("nextButton").addEventListener("click", function () {
 });
 
 //------------------------FIN BUSQUEDA DE CLIENTE X AJAX------------------------------------------
+//------------------------------ELIMINAR PLAN----------------------------------------------
+
+function eliminarPlan(id, nombre) {
+    var confirmacion = confirm("¿Está seguro de eliminar este registro? " + nombre);
+
+    if (confirmacion) {
+        // Enviar la solicitud AJAX para eliminar plan
+        $.ajax({
+            type: 'POST',
+            url: 'eliminar_plan.php',
+            data: { id: id },
+            dataType: 'json',
+            success: function (response) {
+                if (response.success) {
+                    // Eliminación exitosa
+                    alert("El cliente ha sido eliminado correctamente.");
+                    // Aquí puedes recargar la lista de clientes si lo deseas
+                } else {
+                    // Error al eliminar el cliente
+                    alert("Error al eliminar el cliente: " + response.message);
+                }
+            },
+            error: function () {
+                // Error de conexión
+                alert("Error al procesar la solicitud. Por favor, inténtelo nuevamente.");
+            }
+        });
+    }
+}
+
+//------------------------------FIN ELIMINAR PLAN----------------------------------------------

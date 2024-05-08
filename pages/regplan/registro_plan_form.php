@@ -62,9 +62,9 @@ include ("../../conn/validar_rol.php");
         <h2>REGISTRO DEL PLAN</h2>
         <form method="post" id="registro-form">
             <label for="cupoplan">CUPO:</label>
-            <input type="number" class="main" id="cupoplan" name="cupoplan"
+            <input type="number" class="main" id="cupoplan" name="cupoplan" min="1" pattern="^[0-9]+"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                maxlength="5" required>
+                maxlength="11" required>
 
             <span id="cupo-validacion"></span>
 
@@ -94,7 +94,7 @@ include ("../../conn/validar_rol.php");
                     <span id="icono-validacion"></span> <!-- Aquí se mostrará el icono de verificación o X -->
                     <div style="display: block;">
                         <label for="valor_total">Valor total:</label>
-                        <input type="number" class="main" id="valor_total" name="valor_total">
+                        <input type="number" class="main" id="valor_total" name="valor_total" min="1" pattern="^[0-9]+">
 
                         <label for="forma_pago">Forma de pago:</label>
                         <select class="form-select main" name="forma_pago" id="forma_pago" required>
@@ -201,8 +201,8 @@ include ("../../conn/validar_rol.php");
                 <th>ID Titular</th>
                 <th>Valor</th>
                 <th>Medio Pago</th>
-                <th></th>
-                <th></th>
+                <th>    </th>
+                <th>    </th>
             </thead>
             <tbody id="content">
             </tbody>

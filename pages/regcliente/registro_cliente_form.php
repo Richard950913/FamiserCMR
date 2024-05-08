@@ -72,7 +72,7 @@ include ("../../conn/validar_rol.php");
                 <option value="Otro">Otro</option>
             </select>
             <label for="numID">Número de ID:</label>
-            <input type="number" id="numID" name="numID" required required
+            <input type="number" id="numID" name="numID" required required min="1" pattern="^[0-9]+"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="15">
             <span id="clienteExistenteMsg" style="color: red;"></span>
@@ -88,9 +88,9 @@ include ("../../conn/validar_rol.php");
             <label for="lugar">Lugar:</label>
             <input type="text" id="lugar" name="lugar" required>
             <label for="telefono1">Teléfono 1:</label>
-            <input type="tel" id="telefono1" name="telefono1">
+            <input type="tel" id="telefono1" name="telefono1" min="1" pattern="^[0-9]+">
             <label for="telefono2">Teléfono 2:</label>
-            <input type="tel" id="telefono2" name="telefono2">
+            <input type="tel" id="telefono2" name="telefono2" min="1" pattern="^[0-9]+">
             <label for="direccion">Dirección:</label>
             <input type="text" id="direccion" name="direccion">
             <label for="email">Email:</label>
@@ -106,12 +106,12 @@ include ("../../conn/validar_rol.php");
                 <label for="acudiente">Acudiente:</label>
                 <input type="text" id="acudiente" name="acudiente" style="width:60%">
             </div>
-            <div id="mensaje-container" class="anuncio"></div>
-            <div style="display: block;"></div>
+            
             <input type="submit" value="Registrar">
             <div style="margin-left: 65%;"></div>
             <input type="submit" value="limpiar" onclick="limpiarCampos()" style="background-color: #750303;">
-
+            <div style="display: block;"></div>
+            <div id="mensaje-container" class="anuncio"></div>
         </form>
     </div>
 

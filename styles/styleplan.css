@@ -225,18 +225,6 @@ form label[for="comentarios"] {
     box-sizing: border-box;
    }
 
-/* Estilos para el botón de búsqueda */
-#buscarBtn {
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
 /* Estilos para la etiqueta del formulario */
 .form-label {
     font-weight: bold;

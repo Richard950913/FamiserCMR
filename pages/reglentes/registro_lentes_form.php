@@ -62,9 +62,9 @@ include("../../conn/validar_rol.php");
         <h2>COMPRA DE LENTES</h2>
         <form method="post" id="registro-form">
             <label for="cupolente"># de cupo:</label>
-            <input type="number" id="cupolente" name="cupolente" required
+            <input type="number" id="cupolente" name="cupolente" required min="1" pattern="^[0-9]+"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                maxlength="5">
+                maxlength="11">
 
             <span id="cupo-validacion"></span>
             <div style="margin-left: 100%;"></div>
@@ -76,7 +76,7 @@ include("../../conn/validar_rol.php");
                 <option value="DEVOLUCION">Devolución</option>
             </select>
             <label for="idcliente">Id cliente:</label>
-            <input type="number" id="idcliente" name="idcliente" required
+            <input type="number" id="idcliente" name="idcliente" required min="1" pattern="^[0-9]+"
                 oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                 maxlength="15">
 
@@ -115,7 +115,7 @@ include("../../conn/validar_rol.php");
                 <option value="OTROS">OTROS</option>
             </select>
             <label for="valor_total">Valor total:</label>
-            <input type="number" id="valor_total" name="valor_total">
+            <input type="number" id="valor_total" name="valor_total" min="1" pattern="^[0-9]+">
             <label for="sist_pago">Sistema de pago:</label>
             <select class="form-select" name="sist_pago" id="sist_pago" required>
                 <option value="CONTADO">CONTADO</option>

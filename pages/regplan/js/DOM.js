@@ -78,21 +78,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 success: function (response) {
                     // Mostrar mensaje de éxito o error
                     if (response.success) {
-                        messageContainer.text(response.message).css('color', 'green');
+                        messageContainer.text(response.message).css('color', 'green').show();
                         // Limpiar el formulario después de un registro exitoso
                         $('#registro-form')[0].reset();
+                        // Ocultar el mensaje después de 3 segundos
+                        setTimeout(function () {
+                            messageContainer.fadeOut();
+                        }, 3000);
                     } else {
-                        messageContainer.text(response.message).css('color', 'red');
+                        messageContainer.text(response.message).css('color', 'red').show();
                     }
                 },
                 error: function (xhr, status, error) {
                     // Mostrar mensaje de error en el contenedor
-                    messageContainer.text('Error al procesar la solicitud: ' + error).css('color', 'red');
+                    messageContainer.text('Error al procesar la solicitud: ' + error).css('color', 'red').show();
                     console.error('Error en la solicitud AJAX:', xhr.responseText);
                 }
             });
         });
     });
-    
 // --------------------------FIN REGISTRO PLAN AJAX ---------------------------    
 });

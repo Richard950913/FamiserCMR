@@ -4,8 +4,10 @@ require "../../conn/conexion.php";
 $columns = ["cupoplan", "estado", "fecha_vinc", "tipo_plan", "id_titular", "valor_total", "forma_pago"];
 $table = "compra_plan";
 
+// Validar y obtener el campo de búsqueda
 $campo = isset($_POST["busqueda"]) ? $conn->real_escape_string($_POST["busqueda"]) : null;
 
+// Construir la cláusula WHERE dinámicamente
 $where = "";
 if ($campo != null) {
     $where = " WHERE (";
@@ -14,11 +16,10 @@ if ($campo != null) {
     for ($i = 0; $i < $cont; $i++) {
         $where .= $columns[$i] . " LIKE '%" . $campo . "%' OR ";
     }
-    $where = substr_replace($where, "", -3);
-    $where .= ")";
+    $where = rtrim($where, " OR ") . ")";
 }
 
-// Obtener la cantidad de registros totales
+// Obtener la cantidad total de registros
 $sqlCount = "SELECT COUNT(*) as total FROM $table $where";
 $resultCount = $conn->query($sqlCount);
 $rowCount = $resultCount->fetch_assoc();
@@ -36,20 +37,16 @@ $html = "";
 if ($num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
         $html .= '<tr>';
-        $html .= '<td>' . $row['cupoplan'] . '</td>';
-        $html .= '<td>' . $row['estado'] . '</td>';
-        $html .= '<td>' . $row['fecha_vinc'] . '</td>';
-        $html .= '<td>' . $row['tipo_plan'] . '</td>';
-        $html .= '<td>' . $row['id_titular'] . '</td>';
-        $html .= '<td>' . $row['valor_total'] . '</td>';
-        $html .= '<td>' . $row['forma_pago'] . '</td>';
-        $html .= '<td><a href="editar_plan.php?id=' . $row['idclientes'] . '">Editar</a></td>';
-        $html .= '<td><a href="#" onclick="eliminarPlan(' . $row['idclientes'] . ', \'' . addslashes($row['nombresCL']) . '\')">Eliminar</a></td>';
+        foreach ($columns as $column) {
+            $html .= '<td>' . htmlspecialchars($row[$column]) . '</td>';
+        }
+        $html .= '<td><a href="editar_plan.php?id=' . $row['id_titular'] . '">Editar</a></td>';
+        $html .= '<td><a href="#" onclick="eliminarPlan(' . $row['cupoplan'] . ', \'' . addslashes($row['cupoplan']) . '\')">Eliminar</a></td>';
         $html .= '</tr>';
     }
 } else {
     $html .= '<tr>';
-    $html .= '<td colspan="9">Sin resultados</td>';
+    $html .= '<td colspan="' . count($columns) . '">Sin resultados</td>';
     $html .= '</tr>';
 }
 
