@@ -10,7 +10,7 @@ include("../../conn/validar_rol.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/style3.css">
+    <link rel="stylesheet" href="../../styles/stylelentes.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" />
 
@@ -100,7 +100,7 @@ include("../../conn/validar_rol.php");
                 <option value="FOTO ">FOTO</option>
                 <option value="TRANSITION ">TRANSITION</option>
             </select>
-            <label for="graduacion">Graduacióm:</label>
+            <label for="graduacion">Graduación:</label>
             <select class="form-select" name="graduacion" id="graduacion">
                 <option value=""></option>
                 <option value="SENCILLAS">SENCILLAS</option>
@@ -108,7 +108,7 @@ include("../../conn/validar_rol.php");
             </select>
             <label for="comp_adic">Compras adicionales:</label>
             <select class="form-select" name="comp_adic" id="comp_adic">
-                <option value=""></option>
+                <option value=""> </option>
                 <option value="GOTAS">GOTAS</option>
                 <option value="MONTURA">MONTURA</option>
                 <option value="LENTES DE CONTACTO">LENTES DE CONTACTO</option>

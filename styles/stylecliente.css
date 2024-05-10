@@ -104,6 +104,42 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para el select del formulario */
+.form-select {
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    outline: none; /* Elimina el contorno al seleccionar */
+    background-color: #fff; /* Fondo blanco */
+    color: #333; /* Color del texto */
+    width: auto; /* Ancho automático */
+    max-width: 100%; /* Ancho máximo del contenedor */
+    min-width: 100px; /* Ancho mínimo */
+}
+
+/* Estilos para las opciones del select */
+.form-select option[value=""] {
+    display: none; /* Ocultar opciones vacías */
+}
+
+.form-select:hover,
+.form-select:focus {
+    border-color: #da2727; /* Color del borde al pasar el mouse o enfocar */
+}
+
+.form-select:focus {
+    box-shadow: 0 0 5px rgba(235, 35, 9, 0.5); /* Sombra al enfocar */
+}
+
+.form-select option:checked {
+    background-color: #f5f5f5; /* Color de fondo de la opción seleccionada */
+}
+
+.form-select option:hover {
+    background-color: #ddd; /* Color de fondo al pasar el mouse sobre la opción */
+}
 
 /* Estilos para el formulario */
 form {
@@ -119,22 +155,16 @@ form label {
     
 }
 
+
+form input[type="text"],
+form input[type="email"],
 form input[type="number"],
-form input[type="text"] {
+form input[type="tel"] {
     width: calc(20% - 10px);
     padding: 4px;
     border: 1px solid #ccc;
     border-radius: 5px;
     
-}
-
-
-form textarea {
-    width: 70%;
-    padding: 4px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    height: 150px;
 }
 
 form input[type="submit"] {
@@ -149,6 +179,7 @@ form input[type="submit"] {
 }
 
 
+
 /* Estilos para el campo de búsqueda */
 #busqueda {
     transition: width 0.4s ease-in-out;
@@ -157,19 +188,7 @@ form input[type="submit"] {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    background-image: url('searchicon.png');
-}
-
-/* Estilos para el botón de búsqueda */
-#buscarBtn {
-    padding: 10px;
-    margin-top: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+    
 }
 
 /* Estilos para la etiqueta del formulario */
@@ -178,28 +197,6 @@ form input[type="submit"] {
     margin-bottom: 5px;
 }
 
-/* Estilos para el select del formulario */
-.form-select {
-    padding: 1px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
-    font-size: 14px;
-    outline: none; /* Elimina el contorno al seleccionar */
-    background-color: #fff; /* Fondo blanco */
-    color: #333; /* Color del texto */
-    width: 20%; /* Ancho automático */
-    max-width: 100%; /* Ancho máximo del contenedor */
-    min-width: 100px; /* Ancho mínimo */
-}
 
-/* Estilos para las opciones del select */
-.form-select option[value=""] {
-    display: none; /* Ocultar opciones vacías */
-}
 
-.form-select option {
-    background-color: #fff; /* Fondo blanco */
-    color: #333; /* Color del texto */
-}
 

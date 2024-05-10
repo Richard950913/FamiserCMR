@@ -40,7 +40,7 @@ if ($num_rows > 0) {
         foreach ($columns as $column) {
             $html .= '<td>' . htmlspecialchars($row[$column]) . '</td>';
         }
-        $html .= '<td><a href="editar_plan.php?id=' . $row['id_titular'] . '">Editar</a></td>';
+        $html .= '<td><a href="vis_plan.php?id=' . $row['cupoplan'] . '">Visualizar</a></td>';
         $html .= '<td><a href="#" onclick="eliminarPlan(' . $row['cupoplan'] . ', \'' . addslashes($row['cupoplan']) . '\')">Eliminar</a></td>';
         $html .= '</tr>';
     }

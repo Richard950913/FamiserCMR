@@ -27,21 +27,16 @@ if (isset($_POST['id']) && !empty($_POST['id'])) {
         $accion = "Eliminación"; // Acción realizada
 
         // Detalles adicionales sobre el cambio
-        $detalle_cambio = "Plan eliminado: CupoPlan = $cupoplan";
+        $detalle_cambio = "Plan eliminado: CupoPlan = " . $cupoplan;
 
-        // Preparar la consulta SQL para insertar el registro en la tabla de auditoría
-        $sql_insert_auditoria = "INSERT INTO auditoria_registros (tabla_afectada, accion, usuario, detalle_cambio)
-                                 VALUES (?, ?, ?, ?)";
-        $stmt_insert_auditoria = $conn->prepare($sql_insert_auditoria);
-        $stmt_insert_auditoria->bind_param("ssss", $tabla_afectada, $accion, $usuario, $detalle_cambio);
-        
-        // Ejecutar la inserción del registro en la tabla de auditoría
-        if ($stmt_insert_auditoria->execute()) {
-            $stmt_insert_auditoria->close();
-            echo json_encode(array('success' => true));
-        } else {
-            echo json_encode(array('success' => false, 'message' => 'Error al registrar la auditoría: ' . $conn->error));
-        }
+         // Preparar la consulta SQL para insertar el registro de auditoría
+         $sql_insert_auditoria = "INSERT INTO auditoria_registros (tabla_afectada, accion, usuario, detalle_cambio) VALUES (?, ?, ?, ?)";
+         $stmt_insert_auditoria = $conn->prepare($sql_insert_auditoria);
+         $stmt_insert_auditoria->bind_param("ssss", $tabla_afectada, $accion, $username, $detalle_cambio);
+        $stmt_insert_auditoria->execute();
+        $stmt_insert_auditoria->close();
+
+        echo json_encode(array('success' => true));
     } else {
         echo json_encode(array('success' => false, 'message' => 'Error al eliminar el plan: ' . $conn->error));
     }

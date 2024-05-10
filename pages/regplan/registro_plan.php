@@ -37,19 +37,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $comentarios = strtoupper(!empty($_POST['comentarios']) ? $_POST['comentarios'] : null);
     $empresa = strtoupper(!empty($_POST['empresa']) ? $_POST['empresa'] : null);
 
-    // Prepara la consulta SQL utilizando prepared statements
+    // Prepara la consulta SQL para compra_plan utilizando prepared statements
     $sql = "INSERT INTO compra_plan (cupoplan, estado, fecha_vinc, tipo_plan, id_titular, valor_total, forma_pago, nombres1, fec_nac1, parent1, nombres2, fec_nac2, parent2, nombres3, fec_nac3, parent3, nombres4, fec_nac4, parent4, nombres5, fec_nac5, parent5, nombres6, fec_nac6, parent6, nombres7, fec_nac7, parent7, comentarios, empresa) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-    // Inicializa una declaración preparada
+    // Inicializa una declaración preparada para la inserción en compra_plan
     $stmt = mysqli_stmt_init($conn);
-
-    // Verifica si la preparación de la declaración fue exitosa
     if (mysqli_stmt_prepare($stmt, $sql)) {
         // Vincula los parámetros con la declaración preparada como parámetros
-        mysqli_stmt_bind_param($stmt, "isssiissssssssssssssssssssssss", $cupoplan, $estado, $fecha_vinc, $tipo_plan, $id_titular, $valor_total, $forma_pago, $nombres1, $fec_nac1, $parent1, $nombres2, $fec_nac2, $parent2, $nombres3, $fec_nac3, $parent3, $nombres4, $fec_nac4, $parent4, $nombres5, $fec_nac5, $parent5, $nombres6, $fec_nac6, $parent6, $nombres7, $fec_nac7, $parent7, $comentarios, $empresa);
+        mysqli_stmt_bind_param($stmt, "isssiissssssssssssssssssssssss", 
+            $cupoplan, $estado, $fecha_vinc, $tipo_plan, $id_titular, $valor_total, 
+            $forma_pago, $nombres1, $fec_nac1, $parent1, $nombres2, $fec_nac2, $parent2, 
+            $nombres3, $fec_nac3, $parent3, $nombres4, $fec_nac4, $parent4, 
+            $nombres5, $fec_nac5, $parent5, $nombres6, $fec_nac6, $parent6, 
+            $nombres7, $fec_nac7, $parent7, $comentarios, $empresa);
 
-        // Ejecuta la declaración preparada y verifica si fue exitosa
+        // Ejecuta la declaración preparada para la inserción en compra_plan
         if (mysqli_stmt_execute($stmt)) {
             $response = array(
                 'success' => true,
@@ -60,31 +63,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $usuario = $username; // Obtén el nombre de usuario actual
             $tabla_afectada = "compra_plan"; // Nombre de la tabla afectada
             $accion = "inserción"; // Acción realizada
+            $detalle_cambio = "Nuevo plan registrado: CupoPlan = $cupoplan, Titular = $id_titular";
 
-            // Detalles adicionales sobre el cambio
-            $detalle_cambio = "Nuevo plan registrado: CupoPlan = $cupoplan, Estado = $estado";
+            // Prepara la consulta SQL para auditoría utilizando prepared statements
+            $audit_sql = "INSERT INTO auditoria_registros (tabla_afectada, accion, usuario, detalle_cambio) 
+                          VALUES (?, ?, ?, ?)";
+            
+            $stmt_audit = mysqli_stmt_init($conn);
+            if (mysqli_stmt_prepare($stmt_audit, $audit_sql)) {
+                // Vincula los parámetros con la declaración preparada para auditoría
+                mysqli_stmt_bind_param($stmt_audit, "ssss", $tabla_afectada, $accion, $usuario, $detalle_cambio);
 
-            // Insertar el registro en la tabla de auditoría
-            $audit_sql = "INSERT INTO auditoria_registros (tabla_afectada, accion, usuario, detalle_cambio)
-                          VALUES ('$tabla_afectada', '$accion', '$usuario', '$detalle_cambio')";
-            $conn->query($audit_sql);
+                // Ejecuta la declaración preparada para auditoría
+                mysqli_stmt_execute($stmt_audit);
+                mysqli_stmt_close($stmt_audit);
+            } else {
+                // Manejar errores de preparación de la consulta de auditoría
+                error_log("Error al preparar la consulta de auditoría: " . mysqli_error($conn));
+            }
         } else {
             $response = array(
                 'success' => false,
                 'message' => 'Error al registrar el plan. Inténtalo de nuevo.'
             );
         }
-
-        // Cierra la declaración preparada
+        
+        // Cierra la declaración preparada para la inserción en compra_plan
         mysqli_stmt_close($stmt);
     } else {
         $response = array(
             'success' => false,
-            'message' => 'Error al preparar la consulta. Inténtalo de nuevo.'
+            'message' => 'Error al preparar la consulta para registrar el plan. Inténtalo de nuevo.'
         );
     }
 
-    // Convierte la respuesta a formato JSON y la envía de vuelta
+    // Devuelve la respuesta como JSON
     header('Content-Type: application/json');
     echo json_encode($response);
 }
