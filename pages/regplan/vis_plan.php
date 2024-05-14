@@ -5,7 +5,7 @@ include ("../../conn/conexion.php");
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $cupoplan = $_GET['id'];
 
-    // Obtener los datos del cliente desde la base de datos
+    // Obtener los datos del cliente desde la base de datos 
     $sql = "SELECT * FROM compra_plan WHERE cupoplan = '$cupoplan'";
     $resultado = $conn->query($sql);
 
@@ -19,7 +19,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Editar Cliente</title>
+            <title>Editar Plan</title>
             <link rel="stylesheet" href="../../styles/styleplan.css">
         </head>
 
@@ -30,7 +30,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <label for="cupoplan">CUPO:</label>
                     <input type="number" class="main" id="cupoplan" name="cupoplan" min="1" pattern="^[0-9]+"
                         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                        maxlength="11" required value="<?php echo $row['cupoplan']; ?>" readonly>
+                        maxlength="11" required value="<?php echo $row['cupoplan']; ?>">
 
                     <span id="cupo-validacion"></span>
 
@@ -156,10 +156,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
 
                                 <label for="comentarios">Comentarios:</label>
-                                <textarea type="textarea" id="comentarios" name="comentarios" value="<?php echo isset($row['comentarios']) ? $row['comentarios'] : ''; ?>"></textarea>
+                                <textarea id="comentarios"
+                                    name="comentarios"><?php echo isset($row['comentarios']) ? $row['comentarios'] : ''; ?></textarea>
+
                                 <div style="display: block;">
                                     <label for="empresa" id="empresaLabel" style="display: none;">Empresa:</label>
-                                    <input type="text" id="empresa" name="empresa" style="display: none;" value="<?php echo isset($row['empresa']) ? $row['empresa'] : ''; ?>">
+                                    <input type="text" id="empresa" name="empresa" style="display: none;"
+                                        value="<?php echo isset($row['empresa']) ? $row['empresa'] : ''; ?>">
 
 
                                     <!-- Contenedor para mostrar mensajes -->
@@ -167,9 +170,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                                     <div style="display: block;"></div>
                                     <!-- Botones: Guardar y Limpiar -->
                                     <div style="margin-left: 100%;"></div>
-                                    <input type="submit" value="Registrar" class="btn-registrar">
-                                    <input type="submit" value="Limpiar" onclick="limpiarCampos()" class="btn-limpiar">
+                                    <input type="submit" value="Actualizar" class="btn-registrar">
+                                    
+
         </body>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="js/main2.js"></script>
+        <script src="js/DOM.js"></script>
 
         </html>
         <?php
