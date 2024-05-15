@@ -50,7 +50,7 @@ if ($num_rows > 0) {
         $html .= '<td>' . $row['oficio'] . '</td>';
         $html .= '<td>' . $row['empresa'] . '</td>';
         $html .= '<td>' . $row['acudiente'] . '</td>';
-        $html .= '<td><a href="editar_cliente.php?id=' . $row['idclientes'] . '">Editar</a></td>';
+        $html .= '<td><a href="editar_cliente.php?id=' . $row['idclientes'] . '">Visualizar</a></td>';
         $html .= '<td><a href="#" onclick="eliminarCliente(' . $row['idclientes'] . ', \'' . addslashes($row['nombresCL']) . '\')">Eliminar</a></td>';
         $html .= '</tr>';
     }

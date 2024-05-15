@@ -1,10 +1,11 @@
 <?php
-include("../../conn/conexion.php");
-include("../../conn/sesion.php");
+include ("../../conn/conexion.php");
+include ("../../conn/sesion.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
-    $cupoplan = strtoupper(!empty($_POST['cupoplan']) ? $_POST['cupoplan'] : null);
+    $cupoplan = strtoupper(!empty($_POST['cupoantiguo']) ? $_POST['cupoantiguo'] : null);
+    $cuponuevo = $_POST['cupoplan'];
     $estado = strtoupper(!empty($_POST['estado']) ? $_POST['estado'] : null);
     $fecha_vinc = $_POST['fecha_vinc'];
     $tipo_plan = $_POST['tipo_plan'];
@@ -34,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $parent7 = strtoupper(!empty($_POST['parent7']) ? $_POST['parent7'] : null);
     $comentarios = strtoupper(!empty($_POST['comentarios']) ? $_POST['comentarios'] : null);
     $empresa = strtoupper(!empty($_POST['empresa']) ? $_POST['empresa'] : null);
-    
+
     // Obtener el nombre de usuario actual
     $usuario = $username;
 
@@ -48,37 +49,74 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo '<button onclick="regresar()">Regresar</button>';
     } else {
         // Consulta SQL para actualizar el registro
-        $sql_update_plan = "UPDATE compra_plan SET 
-                                estado = '$estado', 
-                                fecha_vinc = '$fecha_vinc', 
-                                tipo_plan = '$tipo_plan', 
-                                id_titular = '$id_titular', 
-                                valor_total = '$valor_total', 
-                                forma_pago = '$forma_pago', 
-                                nombres1 = '$nombres1', 
-                                fec_nac1 = '$fec_nac1', 
-                                parent1 = '$parent1', 
-                                nombres2 = '$nombres2', 
-                                fec_nac2 = '$fec_nac2', 
-                                parent2 = '$parent2',
-                                nombres3 = '$nombres3', 
-                                fec_nac3 = '$fec_nac3', 
-                                parent3 = '$parent3',
-                                nombres4 = '$nombres4', 
-                                fec_nac4 = '$fec_nac4', 
-                                parent4 = '$parent4',
-                                nombres5 = '$nombres5', 
-                                fec_nac5 = '$fec_nac5', 
-                                parent5 = '$parent5',
-                                nombres6 = '$nombres6', 
-                                fec_nac6 = '$fec_nac6', 
-                                parent6 = '$parent6',
-                                nombres7 = '$nombres7', 
-                                fec_nac7 = '$fec_nac7', 
-                                parent7 = '$parent7',
-                                comentarios = '$comentarios',
-                                empresa = '$empresa'
-                            WHERE cupoplan = '$cupoplan'";
+        if (!empty($cuponuevo)) {
+            // Si $cuponuevo tiene un valor, actualiza todos los campos incluyendo cupoplan
+            $sql_update_plan = "UPDATE compra_plan SET 
+                                    cupoplan = '$cuponuevo',
+                                    estado = '$estado', 
+                                    fecha_vinc = '$fecha_vinc', 
+                                    tipo_plan = '$tipo_plan', 
+                                    id_titular = '$id_titular', 
+                                    valor_total = '$valor_total', 
+                                    forma_pago = '$forma_pago', 
+                                    nombres1 = '$nombres1', 
+                                    fec_nac1 = '$fec_nac1', 
+                                    parent1 = '$parent1', 
+                                    nombres2 = '$nombres2', 
+                                    fec_nac2 = '$fec_nac2', 
+                                    parent2 = '$parent2',
+                                    nombres3 = '$nombres3', 
+                                    fec_nac3 = '$fec_nac3', 
+                                    parent3 = '$parent3',
+                                    nombres4 = '$nombres4', 
+                                    fec_nac4 = '$fec_nac4', 
+                                    parent4 = '$parent4',
+                                    nombres5 = '$nombres5', 
+                                    fec_nac5 = '$fec_nac5', 
+                                    parent5 = '$parent5',
+                                    nombres6 = '$nombres6', 
+                                    fec_nac6 = '$fec_nac6', 
+                                    parent6 = '$parent6',
+                                    nombres7 = '$nombres7', 
+                                    fec_nac7 = '$fec_nac7', 
+                                    parent7 = '$parent7',
+                                    comentarios = '$comentarios',
+                                    empresa = '$empresa'
+                                WHERE cupoplan = '$cupoplan'";
+        } else {
+            // Si $cuponuevo está vacío, actualiza todos los campos excepto cupoplan
+            $sql_update_plan = "UPDATE compra_plan SET 
+                                    estado = '$estado', 
+                                    fecha_vinc = '$fecha_vinc', 
+                                    tipo_plan = '$tipo_plan', 
+                                    id_titular = '$id_titular', 
+                                    valor_total = '$valor_total', 
+                                    forma_pago = '$forma_pago', 
+                                    nombres1 = '$nombres1', 
+                                    fec_nac1 = '$fec_nac1', 
+                                    parent1 = '$parent1', 
+                                    nombres2 = '$nombres2', 
+                                    fec_nac2 = '$fec_nac2', 
+                                    parent2 = '$parent2',
+                                    nombres3 = '$nombres3', 
+                                    fec_nac3 = '$fec_nac3', 
+                                    parent3 = '$parent3',
+                                    nombres4 = '$nombres4', 
+                                    fec_nac4 = '$fec_nac4', 
+                                    parent4 = '$parent4',
+                                    nombres5 = '$nombres5', 
+                                    fec_nac5 = '$fec_nac5', 
+                                    parent5 = '$parent5',
+                                    nombres6 = '$nombres6', 
+                                    fec_nac6 = '$fec_nac6', 
+                                    parent6 = '$parent6',
+                                    nombres7 = '$nombres7', 
+                                    fec_nac7 = '$fec_nac7', 
+                                    parent7 = '$parent7',
+                                    comentarios = '$comentarios',
+                                    empresa = '$empresa'
+                                WHERE cupoplan = '$cupoplan'";
+        }
 
         if ($conn->query($sql_update_plan) === TRUE) {
             // Registro actualizado correctamente, registrar en la tabla de auditoría

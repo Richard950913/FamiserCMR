@@ -20,18 +20,18 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Editar Cliente</title>
-            <link rel="stylesheet" href="../../styles/style2.css">
+            <link rel="stylesheet" href="../../styles/stylevisualizar.css">
         </head>
 
         <body>
             <div class="container">
-                <h2>Editar Cliente</h2>
+                <h2>Visualizar Cliente: <?php echo $row['nombresCL']; ?></h2>
                 <form method="post" action="act_cliente.php" id="editarForm">
                     <input type="hidden" name="id" value="<?php echo $row['idclientes']; ?>">
                     <!-- Mostrar los datos del cliente para su edición -->
 
                     <label for="tipoID">Tipo de ID:</label>
-                    <select class="form-select" id="tipoID" name="tipoID" value="<?php echo $row['tipoID']; ?>" required>
+                    <select class="form-select main" id="tipoID" name="tipoID" value="<?php echo $row['tipoID']; ?>" required>
                         <option value="C.C">C.C</option>
                         <option value="C.E">C.E</option>
                         <option value="T.I">T.I</option>
@@ -47,7 +47,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <input type="text" id="nombresCL" name="nombresCL" value="<?php echo $row['nombresCL']; ?>" required><br>
 
                     <label for="sexo">Sexo:</label>
-                    <select name="sexo" id="sexo" value="<?php echo $row['sexo']; ?>">
+                    <select name="sexo" class="form-select main" id="sexo" value="<?php echo $row['sexo']; ?>">
                         <option value=""></option>
                         <option value="F">F</option>
                         <option value="M">M</option>
@@ -70,7 +70,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <span id="emailError" style="color: red;"></span><br>
 
                     <label for="fec_nac">Fecha de nacimiento:</label>
-                    <input type="date" id="fec_nac" name="fec_nac" value="<?php echo $row['fec_nac']; ?>"><br>
+                    <input type="date" class="form-select" id="fec_nac" name="fec_nac" value="<?php echo $row['fec_nac']; ?>"><br>
 
                     <label for="oficio">Oficio:</label>
                     <input type="text" id="oficio" name="oficio" value="<?php echo $row['oficio']; ?>"><br>
@@ -82,7 +82,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <label for="acudiente">Acudiente:</label>
                     <input type="text" id="acudiente" name="acudiente" value="<?php echo $row['acudiente']; ?>" style="width:60%"><br>
                     </div>
-                    <input type="submit" value="Actualizar">
+                    <input type="submit" value="Actualizar" class="btn-registrar">
                 </form>
             </div>
             <!-- Incluir el archivo de scripts -->

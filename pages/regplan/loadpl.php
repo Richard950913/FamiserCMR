@@ -38,7 +38,12 @@ if ($num_rows > 0) {
     while ($row = $resultado->fetch_assoc()) {
         $html .= '<tr>';
         foreach ($columns as $column) {
-            $html .= '<td>' . htmlspecialchars($row[$column]) . '</td>';
+            if ($column == 'id_titular') {
+                // Añadir un evento onclick para redirigir usando JavaScript
+                $html .= '<td><a href= "#" onclick="redirectToEditClientMain(\'' . htmlspecialchars($row[$column]) . '\')">' . htmlspecialchars($row[$column]) . '</a></td>';
+            } else {
+                $html .= '<td>' . htmlspecialchars($row[$column]) . '</td>';
+            }
         }
         $html .= '<td><a href="vis_plan.php?id=' . $row['cupoplan'] . '">Visualizar</a></td>';
         $html .= '<td><a href="#" onclick="eliminarPlan(' . $row['cupoplan'] . ', \'' . addslashes($row['cupoplan']) . '\')">Eliminar</a></td>';

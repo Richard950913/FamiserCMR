@@ -59,7 +59,7 @@ include ("../../conn/validar_rol.php");
         <a href="#">SOPORTE</a>
     </div>
     <div class="container">
-        <h2>REGISTRO DEL PLAN</h2>
+        <h2>REGISTRO DEL PLAN CREDENCIAL</h2>
         <form method="post" id="registro-form">
             <label for="cupoplan">CUPO:</label>
             <input type="number" class="main" id="cupoplan" name="cupoplan" min="1" pattern="^[0-9]+"
@@ -103,7 +103,7 @@ include ("../../conn/validar_rol.php");
                         </select>
                         <div style="margin-left: 100%;"></div>
                         <!-- Persona 1 -->
-                        <label for="nombres1">Persona 1:</label>
+                        <label for="nombres1">Persona 1* (BENEFICIARIO):</label>
                         <input type="text" id="nombres1" name="nombres1">
                         <label for="fec_nac1">Fecha de nacimiento 1:</label>
                         <input class="form-select" type="date" id="fec_nac1" name="fec_nac1">
@@ -230,6 +230,7 @@ include ("../../conn/validar_rol.php");
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/DOM.js"></script>
+    <script src="js/ext.js"></script>
 </body>
 
 </html>

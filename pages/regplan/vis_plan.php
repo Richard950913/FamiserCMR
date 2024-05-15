@@ -27,13 +27,17 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
             <div class="container">
                 <h2>Credencial de Descuentos</h2>
                 <form method="post" action="act_plan.php" id="editarForm">
-                    <label for="cupoplan">CUPO:</label>
+                    <label for="cupoantiguo">CUPO:</label>
+                    <input type="number" class="main" id="cupoantiguo" name="cupoantiguo" min="1" pattern="^[0-9]+"
+                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                        maxlength="11" required value="<?php echo $row['cupoplan']; ?>" readonly>
+
+                    
+                    <label for="cupoplan">CUPO NUEVO (si aplica):</label>
                     <input type="number" class="main" id="cupoplan" name="cupoplan" min="1" pattern="^[0-9]+"
                         oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                        maxlength="11" required value="<?php echo $row['cupoplan']; ?>">
-
-                    <span id="cupo-validacion"></span>
-
+                        maxlength="11" >
+                        <span id="cupo-validacion"></span>
                     <div style="display: block;">
                         <label for="estado">Estado:</label>
                         <select class="form-select main" name="estado" value="<?php echo $row['estado']; ?>" id="estado"
@@ -59,6 +63,8 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                                 maxlength="15" value="<?php echo $row['id_titular']; ?>">
 
                             <span id="icono-validacion"></span> <!-- Aquí se mostrará el icono de verificación o X -->
+                            <button type="button" onclick="redirectToEditClient()">Modificar Cliente</button>
+
                             <div style="display: block;">
                                 <label for="valor_total">Valor total:</label>
                                 <input type="number" class="main" id="valor_total" name="valor_total" min="1" pattern="^[0-9]+"
