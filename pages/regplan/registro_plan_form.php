@@ -103,13 +103,14 @@ include ("../../conn/validar_rol.php");
                         </select>
                         <div style="margin-left: 100%;"></div>
                         <!-- Persona 1 -->
-                        <label for="nombres1">Persona 1* (BENEFICIARIO):</label>
+                        <label for="nombres1">Persona 1*:</label>
                         <input type="text" id="nombres1" name="nombres1">
                         <label for="fec_nac1">Fecha de nacimiento 1:</label>
                         <input class="form-select" type="date" id="fec_nac1" name="fec_nac1">
                         <label for="parent1">Parentesco 1:</label>
                         <input type="text" id="parent1" name="parent1">
-                        <div style="margin-left: 100%;"></div>
+                        <label>(BENEFICIARIO)</label>
+                        <div style="margin-left: 100%;"></div>                        
                         <!-- Persona 2 -->
                         <label for="nombres2">Persona 2:</label>
                         <input type="text" id="nombres2" name="nombres2">
