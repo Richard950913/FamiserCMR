@@ -1,7 +1,7 @@
 <?php
-include("../../conn/conexion.php");
-include("../../conn/sesion.php");
-include("../../conn/validar_rol.php");
+include ("../../conn/conexion.php");
+include ("../../conn/sesion.php");
+include ("../../conn/validar_rol.php");
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +47,7 @@ include("../../conn/validar_rol.php");
         <div class="dropdown">
             <button class="dropbtn">MENU</button>
             <div class="dropdown-content">
-            <a href="../../pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
+                <a href="../../pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
                 <a href="../../pages/reglentes/registro_lentes_form.php">Compra de lente</a>
                 <a href="../../pages/regplan/registro_plan_form.php">Compra de Credencial</a>
                 <a href="../../pages/regabonos/registro_abonos_form.php">Abonos</a>
@@ -70,7 +70,7 @@ include("../../conn/validar_rol.php");
             <div style="margin-left: 100%;"></div>
 
             <label for="estado">Estado:</label>
-            <select class="form-select" name="estado" id="estado" required>
+            <select class="form-select main" name="estado" id="estado" required>
                 <option value="PENDIENTE">Pendiente</option>
                 <option value="CANCELADO">Cancelado</option>
                 <option value="DEVOLUCION">Devolución</option>
@@ -81,68 +81,75 @@ include("../../conn/validar_rol.php");
                 maxlength="15">
 
             <span id="icono-validacion"></span> <!-- Aquí se mostrará el icono de verificación o X -->
+            <div style="display: block;">
+                <label for="fec_compra">Fecha de compra:</label>
+                <input class="form-select main" type="date" id="fec_compra" name="fec_compra" required>
+                <div style="display: block;"></div>
+                <label for="tipo_lente">Tipo de lente:</label>
+                <select class="form-select main" name="tipo_lente" id="tipo_lente">
+                    <option value=""></option>
+                    <option value="MONOFOCAL + ">MONOFOCAL</option>
+                    <option value="BIFOCAL + ">BIFOCAL</option>
+                    <option value="POLICARBONATO + ">POLICARBONATO</option>
+                    <option value="N/A">N/A</option>
+                </select>
+                <label for="filtro">Filtro:</label>
+                <select class="form-select" name="filtro" id="filtro">
+                    <option value=""></option>
+                    <option value="AR ">AR</option>
+                    <option value="BLUE ">BLUE</option>
+                    <option value="FOTO + BLUE ">FOTO + BLUE</option>
+                    <option value="FOTO ">FOTO</option>
+                    <option value="TRANSITION ">TRANSITION</option>
+                    <option value="N/A">N/A</option>
+                </select>
+                <label for="graduacion">Graduación:</label>
+                <select class="form-select" name="graduacion" id="graduacion">
+                    <option value=""></option>
+                    <option value="SENCILLAS">SENCILLAS</option>
+                    <option value="TALLADAS">TALLADAS</option>
+                    <option value="N/A">N/A</option>
+                </select>
+                <label for="comp_adic">Compras adicionales:</label>
+                <select class="form-select" name="comp_adic" id="comp_adic">
+                    <option value=""> </option>
+                    <option value="GOTAS">GOTAS</option>
+                    <option value="MONTURA">MONTURA</option>
+                    <option value="LENTES DE CONTACTO">LENTES DE CONTACTO</option>
+                    <option value="OTROS">OTROS</option>
+                    <option value="N/A">N/A</option>
+                </select>
+                <div style="display: block;"></div>
+                <label for="valor_total">Valor total:</label>
+                <input type="number" id="valor_total" name="valor_total" min="1" pattern="^[0-9]+">
+                <label for="sist_pago">Sistema de pago:</label>
+                <select class="form-select" name="sist_pago" id="sist_pago" required>
+                    <option value="CONTADO">CONTADO</option>
+                    <option value="CREDITO">CREDITO</option>
+                    <option value="SISTECREDITO">SISTECREDITO</option>
+                </select>
+                <div style="margin-left: 100%;"></div>
+                <label for="formula">FÓRMULA:</label>
+                <input type="text" id="formula" name="formula" style="width: 70%;" required>
+                <div style="display: block;"></div>
+                <label for="optometra"> Optómetra</label>
+                <select class="form-select main" name="optometra" id="optometra"></select>
+                <div style="margin-left: 100%;"></div>
+                <label for="comentarios">Comentarios:</label>
+                <textarea id="comentarios" name="comentarios"></textarea>
 
-            <label for="fec_compra">Fecha de compra:</label>
-            <input class="form-select" type="date" id="fec_compra" name="fec_compra" required>
-            <label for="tipo_lente">Tipo de lente:</label>
-            <select class="form-select" name="tipo_lente" id="tipo_lente">
-                <option value=""></option>
-                <option value="MONOFOCAL + ">MONOFOCAL</option>
-                <option value="BIFOCAL + ">BIFOCAL</option>
-                <option value="POLICARBONATO + ">POLICARBONATO</option>
-            </select>
-            <label for="filtro">Filtro:</label>
-            <select class="form-select" name="filtro" id="filtro">
-                <option value=""></option>
-                <option value="AR ">AR</option>
-                <option value="BLUE ">BLUE</option>
-                <option value="FOTO + BLUE ">FOTO + BLUE</option>
-                <option value="FOTO ">FOTO</option>
-                <option value="TRANSITION ">TRANSITION</option>
-            </select>
-            <label for="graduacion">Graduación:</label>
-            <select class="form-select" name="graduacion" id="graduacion">
-                <option value=""></option>
-                <option value="SENCILLAS">SENCILLAS</option>
-                <option value="TALLADAS">TALLADAS</option>
-            </select>
-            <label for="comp_adic">Compras adicionales:</label>
-            <select class="form-select" name="comp_adic" id="comp_adic">
-                <option value=""> </option>
-                <option value="GOTAS">GOTAS</option>
-                <option value="MONTURA">MONTURA</option>
-                <option value="LENTES DE CONTACTO">LENTES DE CONTACTO</option>
-                <option value="OTROS">OTROS</option>
-            </select>
-            <label for="valor_total">Valor total:</label>
-            <input type="number" id="valor_total" name="valor_total" min="1" pattern="^[0-9]+">
-            <label for="sist_pago">Sistema de pago:</label>
-            <select class="form-select" name="sist_pago" id="sist_pago" required>
-                <option value="CONTADO">CONTADO</option>
-                <option value="CREDITO">CREDITO</option>
-                <option value="SISTECREDITO">SISTECREDITO</option>
-            </select>
-            <div style="margin-left: 100%;"></div>
-            <label for="formula">FÓRMULA:</label>
-            <input type="text" id="formula" name="formula" style="width: 70%;" required>
-            <label for="optometra"> Optómetra</label>
-            <select class="form-select" name="optometra" id="optometra"></select>
-            <div style="margin-left: 100%;"></div>
-            <label for="comentarios">Comentarios:</label>
-            <textarea id="comentarios" name="comentarios"></textarea>
+                <div style="margin-left: 100%;"></div>
 
-            <div style="margin-left: 100%;"></div>
-
-            <!-- Botón de guardar -->
-            <input type="submit" value="Registrar">
-            <input type="submit" value="limpiar" onclick="limpiarCampos()" style="background-color: #750303;">
-            <div id="mensaje-container"></div>
+                <!-- Botón de guardar -->
+                <input type="submit" value="Registrar" class="btn-registrar">
+                <input type="submit" value="Limpiar" onclick="limpiarCampos()" class="btn-limpiar">
+                <div id="mensaje-container"></div>
         </form>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/main.js"></script>
 
-   </body>
+</body>
 
 </html>
