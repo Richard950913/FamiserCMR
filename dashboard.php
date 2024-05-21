@@ -33,8 +33,8 @@ include("conn/sesion.php");
                 <a href="pages/regcliente/registro_cliente_form.php">Registrar cliente</a>
                 <a href="pages/reglentes/registro_lentes_form.php">Compra de lente</a>
                 <a href="pages/regplan/registro_plan_form.php">Compra de Credencial</a>
-                <a href="pages/">Abonos</a>
-                <a href="pages/">Garantias</a>
+                <a href="pages/regabonos/registro_abonos_form.php">Abonos</a>
+                <a href="pages/reggarantias/registro_garantias_form.php">Garantias</a>
                 <a href="pages/">Incidentes</a>
                 <a href="pages/">Proceso de Lentes</a>
             </div>
