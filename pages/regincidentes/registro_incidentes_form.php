@@ -46,61 +46,50 @@ include ("../../conn/validar_rol.php");
         <a href="#">SOPORTE</a>
     </div>
     <div class="container">
-        <h2>REGISTRO DE ABONOS</h2>
-        <form method="post" id="registro-form">
+        <h2>INCIDENTES</h2>
+        <form method="post" id="registro-form" action="registro_incidentes.php">
 
             <label for="fec_incid">Fecha de incidente:</label>
             <input class="form-select main" type="date" id="fec_incid" name="fec_incid" required>
+            <div style="display: block;"></div>
+
+            <label for="estado">Estado:</label>
+            <select class="form-select main" name="estado" id="estado" required>
+                <option value=""></option>
+                <option value="PENDIENTE">PENDIENTE</option>
+                <option value="RESUELTO">RESUELTO</option>
+            </select>
+            <div style="display: block;"></div>
+            <label for="qn_atend">Atendido por:</label>
+            <input type="text" id="qn_atend" name="qn_atend" required>
+            <div style="display: block;"></div>
+            <label for="id_persona">Número de ID:</label>
+            <input type="number" id="id_persona" name="id_persona" required min="1" pattern="^[0-9]+"
+                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength="11" >
+                <span id="cliente-status"></span>
+            <div style="display: block;"></div>
+            <label for="notas">Notas:</label> <div style="display: block;"></div>
+            <textarea type="textarea" id="notas" name="notas" required></textarea>
+            <div style="display: block;"></div>
+            <label for="qn_resolv">Resuelto por:</label>
+            <input type="text" id="qn_resolv" name="qn_resolv">
+            <div style="display: block;"></div>
+            
+            <label for="solucion">Solucion:</label> <div style="display: block;"></div>
+            <textarea type="textarea" id="solucion" name="solucion"></textarea>
+            <!-- Contenedor para mostrar mensajes -->
+            <div id="mensaje-container"></div>
             <div style="display: block;">
-                <label for="estado">Estado:</label>
-                <select class="form-select main" name="estado" id="estado" required>
-                    <option value=""></option>
-                    <option value="PENDIENTE">PENDIENTE</option>
-                    <option value="RESUELTO">RESUELTO</option>
-                </select>
-
-                <div id="cupolentes-container" style="display:none;">
-                    <label for="cupolentes">CUPO:</label>
-                    <input type="number" class="main" id="cupolentes" name="cupolentes" min="1" maxlength="11">
-                    <span id="cupolentes-status"></span>
-                </div>
-
-                <div id="cupoplan-container" style="display:none;">
-                    <label for="cupoplan">CUPO:</label>
-                    <input type="number" class="main" id="cupoplan" name="cupoplan" min="1" maxlength="11">
-                    <span id="cupoplan-status"></span>
-                </div>
-                <div style="display: block;">
-                    <label for="tipo_abono">Tipo de abono:</label>
-                    <select class="form-select main" name="tipo_abono" id="tipo_abono" required>
-                        <option value=""></option>
-                        <option value="EFECTIVO">EFECTIVO</option>
-                        <option value="DATAFONO">DATAFONO</option>
-                        <option value="CONSIGNACION">CONSIGNACION</option>
-                    </select>
-                    <div style="display: block;">
-                        <label for="num_recibo">RECIBO Nº:</label>
-                        <input type="text" id="num_recibo" name="num_recibo" required>
-
-                        <label for="valor">Valor total:</label>
-                        <input type="number" class="main" id="valor" name="valor" min="1" required>
-                        <div style="display: block;">
-                            <label for="cod_cobrador">CODIGO COBRADOR:</label>
-                            <input type="number" class="main" id="cod_cobrador" name="cod_cobrador" min="1"
-                                maxlength="3" required>
-
-                            <!-- Contenedor para mostrar mensajes -->
-                            <div id="mensaje-container"></div>
-                            <div style="display: block;">
-                                <!-- Botones: Guardar y Limpiar -->
-                                <input type="submit" value="Registrar" class="btn-registrar">
-                                <input type="button" value="Limpiar" onclick="limpiarCampos()" class="btn-limpiar">
+                <!-- Botones: Guardar y Limpiar -->
+                <input type="submit" value="Registrar" class="btn-registrar">
+                <input type="button" value="Limpiar" onclick="limpiarCampos()" class="btn-limpiar">
         </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/main.js"></script>
-    
+
 </body>
 
 </html>

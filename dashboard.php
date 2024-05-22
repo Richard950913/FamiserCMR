@@ -35,7 +35,7 @@ include("conn/sesion.php");
                 <a href="pages/regplan/registro_plan_form.php">Compra de Credencial</a>
                 <a href="pages/regabonos/registro_abonos_form.php">Abonos</a>
                 <a href="pages/reggarantias/registro_garantias_form.php">Garantias</a>
-                <a href="pages/">Incidentes</a>
+                <a href="pages/regincidentes/registro_incidentes_form.php">Incidentes</a>
                 <a href="pages/">Proceso de Lentes</a>
             </div>
         </div>
