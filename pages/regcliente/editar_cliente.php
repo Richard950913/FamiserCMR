@@ -1,5 +1,6 @@
 <?php
-include ("../../conn/conexion.php");
+include("../../conn/conexion.php");
+include("../../conn/vr_lector.php"); // Asegúrate de que la ruta sea correcta
 
 // Verificar si se proporcionó un ID de cliente válido en la URL
 if (isset($_GET['id']) && !empty($_GET['id'])) {
@@ -39,7 +40,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <!-- Mostrar los datos del cliente para su edición -->
 
                     <label for="tipoID">Tipo de ID:</label>
-                    <select class="form-select main" id="tipoID" name="tipoID" required>
+                    <select class="form-select main" id="tipoID" name="tipoID" <?php echo $solo_lectura ? 'disabled' : ''; ?> required>
                         <option value="C.C" <?php echo $row['tipoID'] == 'C.C' ? 'selected' : ''; ?>>C.C</option>
                         <option value="C.E" <?php echo $row['tipoID'] == 'C.E' ? 'selected' : ''; ?>>C.E</option>
                         <option value="T.I" <?php echo $row['tipoID'] == 'T.I' ? 'selected' : ''; ?>>T.I</option>
@@ -48,54 +49,54 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     </select>
 
                     <label for="numID">Número de ID:</label>
-                    <input type="text" id="numID" name="numID" value="<?php echo $row['numID']; ?>" required><br>
+                    <input type="text" id="numID" name="numID" value="<?php echo $row['numID']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?> required><br>
 
                     <label for="nombresCL">Nombres:</label>
-                    <input type="text" id="nombresCL" name="nombresCL" value="<?php echo $row['nombresCL']; ?>" required><br>
+                    <input type="text" id="nombresCL" name="nombresCL" value="<?php echo $row['nombresCL']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?> required><br>
 
                     <label for="sexo">Sexo:</label>
-                    <select name="sexo" class="form-select main" id="sexo" required>
+                    <select name="sexo" class="form-select main" id="sexo" <?php echo $solo_lectura ? 'disabled' : ''; ?> required>
                         <option value="F" <?php echo $row['sexo'] == 'F' ? 'selected' : ''; ?>>F</option>
                         <option value="M" <?php echo $row['sexo'] == 'M' ? 'selected' : ''; ?>>M</option>
                     </select>
 
                     <label for="lugar">Lugar:</label>
-                    <input type="text" id="lugar" name="lugar" value="<?php echo $row['lugar']; ?>" required><br>
+                    <input type="text" id="lugar" name="lugar" value="<?php echo $row['lugar']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?> required><br>
 
                     <label for="telefono1">Teléfono 1:</label>
-                    <input type="text" id="telefono1" name="telefono1" value="<?php echo $row['telefono1']; ?>"><br>
+                    <input type="text" id="telefono1" name="telefono1" value="<?php echo $row['telefono1']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
 
                     <label for="telefono2">Teléfono 2:</label>
-                    <input type="text" id="telefono2" name="telefono2" value="<?php echo $row['telefono2']; ?>"><br>
+                    <input type="text" id="telefono2" name="telefono2" value="<?php echo $row['telefono2']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
 
                     <label for="direccion">Dirección:</label>
-                    <input type="text" id="direccion" name="direccion" value="<?php echo $row['direccion']; ?>"><br>
+                    <input type="text" id="direccion" name="direccion" value="<?php echo $row['direccion']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
 
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="<?php echo $row['email']; ?>"><br>
+                    <input type="email" id="email" name="email" value="<?php echo $row['email']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
                     <span id="emailError" style="color: red;"></span><br>
 
                     <label for="fec_nac">Fecha de nacimiento:</label>
-                    <input type="date" class="form-select" id="fec_nac" name="fec_nac"
-                        value="<?php echo $row['fec_nac']; ?>"><br>
+                    <input type="date" class="form-select" id="fec_nac" name="fec_nac" value="<?php echo $row['fec_nac']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
 
                     <label for="oficio">Oficio:</label>
-                    <input type="text" id="oficio" name="oficio" value="<?php echo $row['oficio']; ?>"><br>
+                    <input type="text" id="oficio" name="oficio" value="<?php echo $row['oficio']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
 
                     <label for="empresa">Empresa:</label>
-                    <input type="text" id="empresa" name="empresa" value="<?php echo $row['empresa']; ?>"><br>
+                    <input type="text" id="empresa" name="empresa" value="<?php echo $row['empresa']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
 
                     <div id="acudienteContainer" style="display: none;">
                         <label for="acudiente">Acudiente:</label>
-                        <input type="text" id="acudiente" name="acudiente" value="<?php echo $row['acudiente']; ?>"
-                            style="width:60%"><br>
+                        <input type="text" id="acudiente" name="acudiente" value="<?php echo $row['acudiente']; ?>" style="width:60%" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
                     </div>
-                    <input type="submit" value="Actualizar" class="btn-registrar">
+                    <?php if (!$solo_lectura) { ?>
+                        <input type="submit" value="Actualizar" class="btn-registrar">
+                    <?php } ?>
                 </form>
             </div>
 
             <div class="container">
-                <h2>COMPRA DE LENTES</h2>
+            <h2>COMPRA DE LENTES</h2>
                 <?php
                 if ($resultado_lentes->num_rows > 0) {
                     while ($row_lentes = $resultado_lentes->fetch_assoc()) {
@@ -106,30 +107,27 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                 }
                 ?>
             </div>
-
-            <div class="container">
-                <h2>COMPRA DE CREDENCIAL</h2>
-                <?php
-                if ($resultado_plan->num_rows > 0) {
-                    while ($row_plan = $resultado_plan->fetch_assoc()) {
-                        echo '<p><a href="detalle_plan.php?id=' . $row_plan['cupoplan'] . '">' . $row_plan['cupoplan'] . '</a> - ' . $row_plan['fecha_vinc'] . '</p>';
+    
+                <div class="container">
+                    <h2>COMPRA DE CREDENCIAL</h2>
+                    <?php
+                    if ($resultado_plan->num_rows > 0) {
+                        while ($row_plan = $resultado_plan->fetch_assoc()) {
+                            echo '<p><a href="detalle_plan.php?id=' . $row_plan['cupoplan'] . '">' . $row_plan['cupoplan'] . '</a> - ' . $row_plan['fecha_vinc'] . '</p>';
+                        }
+                    } else {
+                        echo '<p>El usuario no ha registrado compras de credenciales.</p>';
                     }
-                } else {
-                    echo '<p>El usuario no ha registrado compras de credenciales.</p>';
-                }
-                ?>
-            </div>
-            
-            <script src="js/editar.js"></script>
-
-        </body>
-
-        </html>
-        <?php
+                    ?>
+                </div>
+            </body>
+            </html>
+            <?php
+        } else {
+            echo "No se encontró ningún cliente con el ID proporcionado.";
+        }
     } else {
-        echo "No se encontró ningún cliente con el ID proporcionado.";
+        echo "No se proporcionó un ID de cliente válido.";
     }
-} else {
-    echo "No se proporcionó un ID de cliente válido.";
-}
-?>
+    ?>
+    
