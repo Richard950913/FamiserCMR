@@ -11,7 +11,15 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     if ($resultado->num_rows > 0) {
         $row = $resultado->fetch_assoc();
-        // Mostrar el formulario con los datos del cliente para su edición
+        $numID = $row['numID'];
+        
+        // Consulta para verificar compras de lentes
+        $sql_lentes = "SELECT cupolente, fec_compra FROM compra_lentes WHERE idcliente = '$numID'";
+        $resultado_lentes = $conn->query($sql_lentes);
+
+        // Consulta para verificar compras de credencial
+        $sql_plan = "SELECT cupoplan, fecha_vinc FROM compra_plan WHERE id_titular = '$numID'";
+        $resultado_plan = $conn->query($sql_plan);
         ?>
         <!DOCTYPE html>
         <html lang="es">
@@ -31,14 +39,13 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <!-- Mostrar los datos del cliente para su edición -->
 
                     <label for="tipoID">Tipo de ID:</label>
-                    <select class="form-select main" id="tipoID" name="tipoID" value="<?php echo $row['tipoID']; ?>" required>
-                        <option value="C.C">C.C</option>
-                        <option value="C.E">C.E</option>
-                        <option value="T.I">T.I</option>
-                        <option value="Pasaporte">Pasaporte</option>
-                        <option value="Otro">Otro</option>
+                    <select class="form-select main" id="tipoID" name="tipoID" required>
+                        <option value="C.C" <?php echo $row['tipoID'] == 'C.C' ? 'selected' : ''; ?>>C.C</option>
+                        <option value="C.E" <?php echo $row['tipoID'] == 'C.E' ? 'selected' : ''; ?>>C.E</option>
+                        <option value="T.I" <?php echo $row['tipoID'] == 'T.I' ? 'selected' : ''; ?>>T.I</option>
+                        <option value="Pasaporte" <?php echo $row['tipoID'] == 'Pasaporte' ? 'selected' : ''; ?>>Pasaporte</option>
+                        <option value="Otro" <?php echo $row['tipoID'] == 'Otro' ? 'selected' : ''; ?>>Otro</option>
                     </select>
-
 
                     <label for="numID">Número de ID:</label>
                     <input type="text" id="numID" name="numID" value="<?php echo $row['numID']; ?>" required><br>
@@ -47,10 +54,9 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <input type="text" id="nombresCL" name="nombresCL" value="<?php echo $row['nombresCL']; ?>" required><br>
 
                     <label for="sexo">Sexo:</label>
-                    <select name="sexo" class="form-select main" id="sexo" value="<?php echo $row['sexo']; ?>">
-                        <option value=""></option>
-                        <option value="F">F</option>
-                        <option value="M">M</option>
+                    <select name="sexo" class="form-select main" id="sexo" required>
+                        <option value="F" <?php echo $row['sexo'] == 'F' ? 'selected' : ''; ?>>F</option>
+                        <option value="M" <?php echo $row['sexo'] == 'M' ? 'selected' : ''; ?>>M</option>
                     </select>
 
                     <label for="lugar">Lugar:</label>
@@ -66,11 +72,12 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <input type="text" id="direccion" name="direccion" value="<?php echo $row['direccion']; ?>"><br>
 
                     <label for="email">Email:</label>
-                    <input type="text" id="email" name="email" value="<?php echo $row['email']; ?>"><br>
+                    <input type="email" id="email" name="email" value="<?php echo $row['email']; ?>"><br>
                     <span id="emailError" style="color: red;"></span><br>
 
                     <label for="fec_nac">Fecha de nacimiento:</label>
-                    <input type="date" class="form-select" id="fec_nac" name="fec_nac" value="<?php echo $row['fec_nac']; ?>"><br>
+                    <input type="date" class="form-select" id="fec_nac" name="fec_nac"
+                        value="<?php echo $row['fec_nac']; ?>"><br>
 
                     <label for="oficio">Oficio:</label>
                     <input type="text" id="oficio" name="oficio" value="<?php echo $row['oficio']; ?>"><br>
@@ -79,70 +86,41 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <input type="text" id="empresa" name="empresa" value="<?php echo $row['empresa']; ?>"><br>
 
                     <div id="acudienteContainer" style="display: none;">
-                    <label for="acudiente">Acudiente:</label>
-                    <input type="text" id="acudiente" name="acudiente" value="<?php echo $row['acudiente']; ?>" style="width:60%"><br>
+                        <label for="acudiente">Acudiente:</label>
+                        <input type="text" id="acudiente" name="acudiente" value="<?php echo $row['acudiente']; ?>"
+                            style="width:60%"><br>
                     </div>
                     <input type="submit" value="Actualizar" class="btn-registrar">
                 </form>
             </div>
-            <!-- Incluir el archivo de scripts -->
-            <script>
-    // Función para validar el correo electrónico
-    function validarEmail() {
-        var emailInput = document.getElementById("email").value.trim(); // Eliminar espacios en blanco al principio y al final
-        var emailError = document.getElementById("emailError");
-        // Si el campo no está en blanco y no sigue un formato de correo electrónico válido, mostrar un mensaje de error
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (emailInput !== "" && !emailRegex.test(emailInput)) {
-            emailError.innerText = "El email proporcionado no sigue un formato regular.";
-            return false; // Evitar que se envíe el formulario
-        } else {
-            emailError.innerText = ""; // Limpiar el mensaje de error si el correo es válido
-            return true; // Permitir el envío del formulario
-        }
-    }
 
-    // Asignar la función validarEmail() al evento de envío del formulario
-    document.getElementById("editarForm").addEventListener("submit", function (event) {
-        if (!validarEmail()) {
-            event.preventDefault(); // Detener el envío del formulario si el correo no cumple el formato
-        }
-    });
-</script>
- <!-- verificar edad si es menor-->
- <script>
-        // Función para actualizar la visibilidad del campo de acudiente según la edad
-        function actualizarCampos() {
-            var fechaNacimiento = document.getElementById("fec_nac").value;
-            var hoy = new Date();
-            var fechaNacimiento = new Date(fechaNacimiento);
-            var edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
-            var mes = hoy.getMonth() - fechaNacimiento.getMonth();
+            <div class="container">
+                <h2>COMPRA DE LENTES</h2>
+                <?php
+                if ($resultado_lentes->num_rows > 0) {
+                    while ($row_lentes = $resultado_lentes->fetch_assoc()) {
+                        echo '<p><a href="detalle_lente.php?id=' . $row_lentes['cupolente'] . '">' . $row_lentes['cupolente'] . '</a> - ' . $row_lentes['fec_compra'] . '</p>';
+                    }
+                } else {
+                    echo '<p>El usuario no ha registrado compras de lentes.</p>';
+                }
+                ?>
+            </div>
 
-            if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
-                edad--;
-            }
-
-            var acudienteContainer = document.getElementById("acudienteContainer");
-
-            if (edad < 18) {
-                acudienteContainer.style.display = "block";
-                document.getElementById("acudiente").required = true;
-            } else {
-                acudienteContainer.style.display = "none";
-                document.getElementById("acudiente").required = false;
-                document.getElementById("acudiente").value = ""; // Limpiar el valor si se oculta
-            }
-        }
-
-        // Asignar la función actualizarCampos al evento onchange del campo de fecha de nacimiento
-        document.getElementById("fec_nac").addEventListener("change", actualizarCampos);
-
-        // Llamar a la función actualizarCampos al cargar la página para asegurarse de que el campo se oculte inicialmente
-        window.onload = actualizarCampos;
-    </script>
-
-
+            <div class="container">
+                <h2>COMPRA DE CREDENCIAL</h2>
+                <?php
+                if ($resultado_plan->num_rows > 0) {
+                    while ($row_plan = $resultado_plan->fetch_assoc()) {
+                        echo '<p><a href="detalle_plan.php?id=' . $row_plan['cupoplan'] . '">' . $row_plan['cupoplan'] . '</a> - ' . $row_plan['fecha_vinc'] . '</p>';
+                    }
+                } else {
+                    echo '<p>El usuario no ha registrado compras de credenciales.</p>';
+                }
+                ?>
+            </div>
+            
+            <script src="js/editar.js"></script>
 
         </body>
 
