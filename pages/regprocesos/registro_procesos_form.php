@@ -1,7 +1,7 @@
 <?php
 include ("../../conn/conexion.php");
 include ("../../conn/sesion.php");
-include ("../../conn/vr_mixto.php");
+include ("../../conn/vr_opt.php");
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@ include ("../../conn/vr_mixto.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles/styleplan.css">
+    <link rel="stylesheet" href="../../styles/styleprocesos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-..." crossorigin="anonymous" />
     <title>Registro de incidentes</title>
@@ -46,43 +46,44 @@ include ("../../conn/vr_mixto.php");
         <a href="#">SOPORTE</a>
     </div>
     <div class="container">
-        <h2>INCIDENTES</h2>
-        <form method="post" id="registro-form" action="registro_incidentes.php">
-
-            <label for="fec_incid">Fecha de incidente:</label>
-            <input class="form-select main" type="date" id="fec_incid" name="fec_incid" required>
+        <h2>PROCESOS DE LENTES LABORATORIO Y ENTREGAS</h2>
+        <form method="post" id="registro-form">
+            <label for="cupo_id">CUPO:</label>    
+            <input type="number" class="main" id="cupo_id" name="cupo_id" min="1" maxlength="11">
+            <span id="cupo-status"></span>
+            <div style="display: block;">
+                <label for="fec_mand">Fecha enviado a lab:</label>
+                <input class="form-select main" type="date" id="fec_mand" name="fec_mand" required>
+            </div>
             <div style="display: block;"></div>
-
-            <label for="estado">Estado:</label>
-            <select class="form-select main" name="estado" id="estado" required>
+            <label for="num_talonario">Talonario Nº:</label>
+            <input type="text" id="num_talonario" name="num_talonario" required>
+            <div style="display: block;"></div>
+            <label for="proceso">Proceso:</label>
+            <select class="form-select main" name="proceso" id="proceso" required>
                 <option value=""></option>
-                <option value="PENDIENTE">PENDIENTE</option>
-                <option value="RESUELTO">RESUELTO</option>
+                <option value="ENVIADO">ENVIADO</option>
+                <option value="RECIBIDO">RECIBIDO</option>
+                <option value="DESPACHADO">DESPACHADO</option>
+                <option value="OFICINA">OFICINA</option>
             </select>
-            
-           
             <div style="display: block;"></div>
-            <label for="id_persona">Número de ID:</label>
-            <input type="number" id="id_persona" name="id_persona" required min="1" pattern="^[0-9]+"
-                oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                maxlength="11" >
-                <span id="cliente-status"></span>
+            <label for="despach_por">Despachado por (si aplica):</label>
+            <input type="text" id="despach_por" name="despach_por">
             <div style="display: block;"></div>
-            <label for="notas">Notas:</label> <div style="display: block;"></div>
-            <textarea type="textarea" id="notas" name="notas" required></textarea>
-            <div style="display: block;"></div>
-            <label for="qn_resolv">Resuelto por:</label>
-            <input type="text" id="qn_resolv" name="qn_resolv">
-            <div style="display: block;"></div>
-            
-            <label for="solucion">Solucion:</label> <div style="display: block;"></div>
-            <textarea type="textarea" id="solucion" name="solucion"></textarea>
+            <label for="si_garantia">Garantia:</label>
+            <select class="form-select main" name="si_garantia" id="si_garantia" >
+                <option value=""></option>
+                <option value="NO">NO</option>
+                <option value="SI">SI</option>
+            </select>
             <!-- Contenedor para mostrar mensajes -->
             <div id="mensaje-container"></div>
             <div style="display: block;">
                 <!-- Botones: Guardar y Limpiar -->
                 <input type="submit" value="Registrar" class="btn-registrar">
                 <input type="button" value="Limpiar" onclick="limpiarCampos()" class="btn-limpiar">
+            </div>
         </form>
     </div>
 

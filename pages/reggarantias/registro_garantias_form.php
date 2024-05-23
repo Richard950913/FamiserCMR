@@ -1,7 +1,7 @@
 <?php
 include ("../../conn/conexion.php");
 include ("../../conn/sesion.php");
-include ("../../conn/validar_rol.php");
+include ("../../conn/vr_opt.php");
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +50,7 @@ include ("../../conn/validar_rol.php");
         <form method="post" id="registro-form">
 
             <label for="cupo">Cupo:</label>
-            <input type="number" class="main" id="cupo" name="cupo" min="1" maxlength="11">
+            <input type="number" class="main" id="cupo" name="cupo" min="1" maxlength="11" required>
             <span id="cupo-status"></span>
             <div style="display: block;">
             <label for="fec_gar">Fecha de garantias:</label>

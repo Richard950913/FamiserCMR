@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Recibir datos del formulario
     $fec_incid = $_POST['fec_incid'];
     $estado = $_POST['estado'];
-    $qn_atend = $_POST['qn_atend'];
+    $qn_atend = $_SESSION['username'];
     $id_persona = $_POST['id_persona'];
     $notas = $_POST['notas'];
     $qn_resolv = $_POST['qn_resolv'];

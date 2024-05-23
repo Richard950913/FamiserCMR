@@ -1,7 +1,7 @@
 <?php
 include ("../../conn/conexion.php");
 include ("../../conn/sesion.php");
-include ("../../conn/validar_rol.php");
+include ("../../conn/vr_opt.php");
 ?>
 
 <!DOCTYPE html>
