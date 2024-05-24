@@ -68,7 +68,7 @@ include ("../../conn/vr_cred.php");
 
             <span id="cupo-validacion"></span>
 
-            <div style="display: block;">
+            <div style="display: block;"></div>
                 <label for="estado">Estado:</label>
                 <select class="form-select main" name="estado" id="estado" required>
                     <option value="PENDIENTE">Pendiente</option>

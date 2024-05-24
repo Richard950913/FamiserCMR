@@ -2,6 +2,19 @@
 include ("../../conn/conexion.php");
 include ("../../conn/sesion.php");
 include ("../../conn/vr_opt.php");
+
+// Verificar si el usuario tiene el rol 4 y restringir el acceso
+if ($_SESSION['rol_ID'] == 4) {
+    // Redirigir a una página de acceso denegado o mostrar un mensaje de error
+    echo '<script>
+        window.onload = function() {
+            alert("No tienes permitido el acceso. Por favor, contacta con administración.");
+            window.location.href = "/ini/dashboard.php";
+        }
+    </script>';
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
