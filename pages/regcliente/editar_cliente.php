@@ -76,7 +76,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
                     <input type="text" id="direccion" name="direccion" value="<?php echo $row['direccion']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
 
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="<?php echo $row['email']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
+                    <input type="text" id="email" name="email" value="<?php echo $row['email']; ?>" <?php echo $solo_lectura ? 'readonly' : ''; ?>><br>
                     <span id="emailError" style="color: red;"></span><br>
 
                     <label for="fec_nac">Fecha de nacimiento:</label>

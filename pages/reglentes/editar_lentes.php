@@ -38,7 +38,7 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
         <body>
             <div class="container">
                 <h2>Visualizar Lente: <?php echo $row['cupolente']; ?></h2>
-                <form method="post" action="act_lente.php" id="editarForm">
+                <form method="post" action="act_lentes.php" id="editarForm">
                     <input type="hidden" name="id" value="<?php echo $row['cupolente']; ?>">
                     <!-- Mostrar los datos del lente para su edición -->
 

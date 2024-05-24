@@ -42,7 +42,7 @@ include ("../../conn/vr_mixto.php");
     </div>
     <div class="dashboard-container">
     </div>
-    <div class="menu-bar">
+    <div class="menu-bar" >
         <a href="../../dashboard.php">INICIO</a>
         <div class="dropdown">
             <button class="dropbtn">MENU</button>
